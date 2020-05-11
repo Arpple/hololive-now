@@ -559,4 +559,84 @@ defmodule HoliliveNow.ScheduleCase do
         ]}
      ]}
   end
+
+  def col_head() do
+    {"div",
+     [
+       {"class", "col-12 col-sm-12 col-md-12"},
+       {"style", "padding:0;"}
+     ],
+     [
+       {"div", [{"class", "row no-gutters"}],
+        [
+          {"div",
+           [
+             {"class", "col-5 col-sm-5 col-md-5 text-left datetime"},
+             {"style", "line-height:30px;"}
+           ],
+           [
+             {"img",
+              [
+                {"src", "https://schedule.hololive.tv/dist/images/icons/youtube.png"},
+                {"style",
+                 "vertical-align:middle;position: relative;top:-0.1em; width:17px;height:17px;"}
+              ], []},
+             "\r\n                        00:01\r\n                    "
+           ]},
+          {"div",
+           [
+             {"class", "col text-right name"},
+             {"style", "line-height:30px;margin-right:5px;"}
+           ],
+           [
+             "\r\n                                                    宝鐘マリン\r\n                                            "
+           ]}
+        ]}
+     ]}
+  end
+
+  def col_thumbnail() do
+    {"div",
+     [
+       {"class", "col-12 col-sm-12 col-md-12"},
+       {"style", "padding:0 0 5px 0;text-align: center;"}
+     ],
+     [
+       {"img",
+        [
+          {"src", "https://img.youtube.com/vi/gliXPuiGjFU/mqdefault.jpg"},
+          {"style", "box-shadow: 0 0 5px 5px black inset;"}
+        ], []}
+     ]}
+  end
+
+  def col_icons() do
+    {"div",
+     [
+       {"class", "col-12 col-sm-12 col-md-12"},
+       {"style", "padding:0;"}
+     ],
+     [
+       {"div",
+        [
+          {"class", "row no-gutters justify-content-between"},
+          {"style", "height: 60px;overflow: hidden;"}
+        ],
+        [
+          {"div",
+           [
+             {"class", "col col-sm col-md col-lg col-xl"},
+             {"style", "width:60px;text-align: center;"}
+           ],
+           [
+             {"img",
+              [
+                {"src",
+                 "https://yt3.ggpht.com/a/AGF-l7_dX9d8sMDya_L_ApF7pxUSiwtSOId7Bufd-g=s88-c-k-c0xffffffff-no-rj-mo"},
+                {"style", "border-radius: 50%;width: 60px;border: 2px #ba2c2b solid;"}
+              ], []}
+           ]}
+        ]}
+     ]}
+  end
 end

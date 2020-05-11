@@ -22,50 +22,50 @@ defmodule HoliliveNow.ScheduleTest do
     assert date == ~D[2020-05-11]
   end
 
-  test "get containers from group container" do
-    blocks =
+  test "get containers from group container with date" do
+    containers =
       ScheduleCase.date_group_container()
-      |> Schedule.get_blocks()
+      |> Schedule.get_containers()
 
-    assert length(blocks) == 4
+    assert length(containers) == 4
   end
 
-#   test "split containers into date group" do
-#     containers = ScheduleCase.containers()
+  test "get containers from group containre without date" do
+    containers =
+      ScheduleCase.content_group_container()
+      |> Schedule.get_containers()
 
-#     [date_10_containers, date_11_containers] =
-#       ScheduleCase.containers()
-#       |> Schedule.split_containers()
+    assert length(containers) == 1
+  end
 
-#     assert date_10_containers.date == ~D[2020-05-10]
-#     assert length(date_10_containers.containers) == 5
+  test "get time from head col" do
+    time =
+      ScheduleCase.col_head()
+      |> Schedule.get_time()
 
-#     assert date_11_containers.date == ~D[2020-05-11]
-#     assert length(date_11_containers.containers) == 4
-#   end
+    assert time == ~T[00:01:00]
+  end
+  
+  test "get channel name from head col" do
+    channel =
+      ScheduleCase.col_head()
+      |> Schedule.get_channel()
+    assert channel == "宝鐘マリン"
+  end
 
-#   test "get container date" do
-#     container = ScheduleCase.container()
-#     date = Schedule.get_date(container)
-#     assert date == ~D[2020-05-10]
-#   end
+  test "get thumbnail url from thumbnail col" do
+    url =
+      ScheduleCase.col_thumbnail()
+      |> Schedule.get_thumbnail_url()
+    
+    assert url == "https://img.youtube.com/vi/gliXPuiGjFU/mqdefault.jpg"
+  end
 
-#   test "get head block channel" do
-#     head = ScheduleCase.head()
-#     channel = Schedule.get_channel(head)
-#     assert channel == "百鬼あやめ"
-#   end
+  test "get icons url from icon col" do
+    [icon] =
+      ScheduleCase.col_icons()
+      |> Schedule.get_icons_url()
 
-#   test "get head block live time" do
-#     date = ~D[2020-05-10]
-#     head = ScheduleCase.head()
-#     time = Schedule.get_time(head, date)
-#     assert time == ~N[2020-05-10 00:02:00]
-#   end
-
-#   test "get thumbnail block thumbnail url" do
-#     thumbnail = ScheduleCase.thumbnail()
-#     url = Schedule.get_thumbnail_url(thumbnail)
-#     assert url == "https://img.youtube.com/vi/7ePTTaERAF8/mqdefault.jpg"
-#   end
+    assert icon == "https://yt3.ggpht.com/a/AGF-l7_dX9d8sMDya_L_ApF7pxUSiwtSOId7Bufd-g=s88-c-k-c0xffffffff-no-rj-mo"
+  end
 end

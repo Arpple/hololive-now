@@ -12,28 +12,11 @@ defmodule HoliliveNow.Schedule do
     nil
   end
 
-
   def read_container(container) do
-    date = get_date(container)
-
-    blocks = container
-    |> Floki.find(".thumbnail .container .row")
-
-    blocks
-
-    # IO.inspect(length(blocks))
-
-    # blocks
-    # |> Enum.at(6) # only 1st for test
-    # |> read_block()
+    [row] = Floki.children(container)
+    [head, thumbnail, icons] = Floki.children(row)
   end
-
-  def read_block(block) do
-    [head, thumbnail, icons] = Floki.children(block)
-
-    icons
-  end
-  
+ 
   def has_date?(group_container) do
     datetime = Floki.find(group_container, ".navbar-text")
     not Enum.empty?(datetime)
@@ -58,7 +41,7 @@ defmodule HoliliveNow.Schedule do
     date
   end
 
-  def get_time(head, date) do
+  def get_time(head) do
     [hour, min] = head
     |> Floki.find(".datetime")
     |> Floki.text()
@@ -67,14 +50,12 @@ defmodule HoliliveNow.Schedule do
     |> Enum.map(&Util.parse_int/1)
 
     {:ok, time} = Time.new(hour, min, 0)
-    {:ok, datetime} = NaiveDateTime.new(date, time)
-    datetime
+    time
   end
 
-  def get_blocks(container) do
-    container
+  def get_containers(group_container) do
+    group_container
     |> Floki.find(".thumbnail .container")
-    |> Enum.map(fn block -> block end)
   end
 
   def get_channel(head) do
@@ -93,6 +74,11 @@ defmodule HoliliveNow.Schedule do
   end
 
   def get_icons_url(icons) do
-
+    icons
+    |> Floki.find("img")
+    |> Enum.map(fn img ->
+      [src] = Floki.attribute(img, "src")
+      src
+    end)
   end
 end
