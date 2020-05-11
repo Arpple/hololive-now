@@ -6,14 +6,12 @@ defmodule HoliliveNow.Schedule do
 
     containers = body
     |> Floki.parse_document!()
-    |> Floki.find("#all")
-    |> Enum.at(0)
-    |> Floki.children()
-
-    containers
-    |> Enum.at(0) # only 1st for test
-    |> read_container()
+    |> Floki.find("#all .container")
+    |> Enum.at(1)
+    |> IO.inspect(limit: :infinity)
+    nil
   end
+
 
   def read_container(container) do
     date = get_date(container)
@@ -22,21 +20,28 @@ defmodule HoliliveNow.Schedule do
     |> Floki.find(".thumbnail .container .row")
 
     blocks
-    |> Enum.at(0) # only 1st for test
-    |> read_block()
+
+    # IO.inspect(length(blocks))
+
+    # blocks
+    # |> Enum.at(6) # only 1st for test
+    # |> read_block()
   end
 
   def read_block(block) do
     [head, thumbnail, icons] = Floki.children(block)
 
-    thumbnail
+    icons
+  end
+  
+  def has_date?(group_container) do
+    datetime = Floki.find(group_container, ".navbar-text")
+    not Enum.empty?(datetime)
   end
 
-  def get_date(container) do
-    [date_str, _] = container
-    |> Floki.children()
-    |> Enum.at(0)
-    |> Floki.children()
+  def get_date(group_container) do
+    [date_str, _] = group_container
+    |> Floki.find(".navbar-text")
     |> Enum.at(0)
     |> Floki.text()
     |> String.trim()
@@ -64,6 +69,12 @@ defmodule HoliliveNow.Schedule do
     {:ok, time} = Time.new(hour, min, 0)
     {:ok, datetime} = NaiveDateTime.new(date, time)
     datetime
+  end
+
+  def get_blocks(container) do
+    container
+    |> Floki.find(".thumbnail .container")
+    |> Enum.map(fn block -> block end)
   end
 
   def get_channel(head) do
