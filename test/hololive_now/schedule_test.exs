@@ -68,4 +68,13 @@ defmodule HoliliveNow.ScheduleTest do
 
     assert icon == "https://yt3.ggpht.com/a/AGF-l7_dX9d8sMDya_L_ApF7pxUSiwtSOId7Bufd-g=s88-c-k-c0xffffffff-no-rj-mo"
   end
+
+  test "get multiple icons url from icon col" do
+    [icon_1, icon_2] =
+      ScheduleCase.col_icons_multi()
+      |> Schedule.get_icons_url()
+
+    assert icon_1 == "https://yt3.ggpht.com/a/AGF-l78pYNGWXckjVjmMsSz4iPeCzmWB2DHFW3lLdQ=s88-c-k-c0xffffffff-no-rj-mo"
+    assert icon_2 == "https://yt3.ggpht.com/a/AGF-l7-UWVGytfW-cAiCvg8r2C_6Gk2SnqSkJP9Cqg=s88-c-k-c0xffffffff-no-rj-mo"
+  end
 end

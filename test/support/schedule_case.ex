@@ -639,4 +639,43 @@ defmodule HoliliveNow.ScheduleCase do
         ]}
      ]}
   end
+
+  def col_icons_multi() do
+    {"div", [{"class", "col-12 col-sm-12 col-md-12"}, {"style", "padding:0;"}],
+     [
+       {"div",
+        [
+          {"class", "row no-gutters justify-content-between"},
+          {"style", "height: 60px;overflow: hidden;"}
+        ],
+        [
+          {"div",
+           [
+             {"class", "col col-sm col-md col-lg col-xl"},
+             {"style", "width:60px;text-align: center;"}
+           ],
+           [
+             {"img",
+              [
+                {"src",
+                 "https://yt3.ggpht.com/a/AGF-l78pYNGWXckjVjmMsSz4iPeCzmWB2DHFW3lLdQ=s88-c-k-c0xffffffff-no-rj-mo"},
+                {"style", "border-radius: 50%;width: 60px;border: 2px #f9afb2 solid;"}
+              ], []}
+           ]},
+          {"div",
+           [
+             {"class", "col col-sm col-md col-lg col-xl"},
+             {"style", "width:60px;text-align: center;padding:-20px;"}
+           ],
+           [
+             {"img",
+              [
+                {"src",
+                 "https://yt3.ggpht.com/a/AGF-l7-UWVGytfW-cAiCvg8r2C_6Gk2SnqSkJP9Cqg=s88-c-k-c0xffffffff-no-rj-mo"},
+                {"style", "border-radius: 50%;width: 60px;border: 2px #f38514 solid;"}
+              ], []}
+           ]}
+        ]}
+     ]}
+  end
 end

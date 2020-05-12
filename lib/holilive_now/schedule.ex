@@ -4,11 +4,16 @@ defmodule HoliliveNow.Schedule do
   def all() do
     %{body: body} = HTTPoison.get!(@url)
 
-    containers = body
+    group_containers = body
     |> Floki.parse_document!()
     |> Floki.find("#all .container")
-    |> Enum.at(1)
-    |> IO.inspect(limit: :infinity)
+
+    group_container = Enum.at(group_containers, 0)
+    containers = get_containers(group_container)
+    container = Enum.at(containers, 2)
+
+    IO.inspect(container)
+    
     nil
   end
 
