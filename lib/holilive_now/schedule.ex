@@ -7,19 +7,44 @@ defmodule HoliliveNow.Schedule do
     group_containers = body
     |> Floki.parse_document!()
     |> Floki.find("#all .container")
-
-    group_container = Enum.at(group_containers, 0)
-    containers = get_containers(group_container)
-    container = Enum.at(containers, 2)
-
-    IO.inspect(container)
-    
-    nil
+    |> read_group_containers()
+    |> convert_to_lives()
   end
 
-  def read_container(container) do
+  def read_group_containers(group_containers) do
+    list = Enum.reduce(group_containers, [], fn group_container, acc ->
+      if has_date?(group_container) do
+        block = %{
+          date: get_date(group_container),
+          containers: get_containers(group_container),
+        }
+
+        [block | acc]
+      else
+        [block | rem] = acc
+        [ %{block | containers: block.containers ++ get_containers(group_container)} | rem ]
+      end
+    end)
+
+    Enum.reverse(list)
+  end
+
+  def convert_to_lives(blocks) do
+    Enum.map(blocks, fn block ->
+      lives = Enum.map(block.containers, fn container -> read_container(block.date, container) end)
+      %{ date: block.date, lives: lives }
+    end)
+  end
+
+  def read_container(date, container) do
     [row] = Floki.children(container)
     [head, thumbnail, icons] = Floki.children(row)
+    %{
+      datetime: NaiveDateTime.new(date, get_time(head)),
+      channel: get_channel(head),
+      thumbnail: get_thumbnail_url(thumbnail),
+      icons: get_icons_url(icons),
+    }
   end
  
   def has_date?(group_container) do
