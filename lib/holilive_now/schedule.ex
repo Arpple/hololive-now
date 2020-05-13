@@ -39,8 +39,9 @@ defmodule HoliliveNow.Schedule do
   def read_container(date, container) do
     [row] = Floki.children(container)
     [head, thumbnail, icons] = Floki.children(row)
+    {:ok, datetime} = NaiveDateTime.new(date, get_time(head))
     %{
-      datetime: NaiveDateTime.new(date, get_time(head)),
+      datetime: datetime,
       channel: get_channel(head),
       thumbnail: get_thumbnail_url(thumbnail),
       icons: get_icons_url(icons),

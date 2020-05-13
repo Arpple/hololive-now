@@ -18,6 +18,7 @@ defmodule HoliliveNowWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+    live "/lives", ScheduleLive, :index
   end
 
   # Other scopes may use custom stacks.

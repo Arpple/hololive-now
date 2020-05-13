@@ -1,4 +1,4 @@
-defmodule HoliliveNowWeb.PageLive do
+defmodule HoliliveNowWeb.PageLive.Index do
   use HoliliveNowWeb, :live_view
 
   @impl true

@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Now</h1>
+  <%= for group <- @lives do %>
+    <h3><%= group.date %></h3>
+    <%= for live <- group.lives do %>
+      <p><%= time(live.datetime) %></p>
+      <p>- <%= live.channel %></p>
+      <img src="<%= live.thumbnail %>">
+    <% end %>
+  <% end %>
+</div>
