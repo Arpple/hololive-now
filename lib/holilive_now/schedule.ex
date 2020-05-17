@@ -36,11 +36,13 @@ defmodule HoliliveNow.Schedule do
     end)
   end
 
-  def read_container(date, container) do
+  def read_container(date, container_a) do
+    [container] = Floki.find(container_a, ".container")
     [row] = Floki.children(container)
     [head, thumbnail, icons] = Floki.children(row)
     {:ok, datetime} = NaiveDateTime.new(date, get_time(head))
     %{
+      url: get_url(container_a),
       datetime: datetime,
       channel: get_channel(head),
       thumbnail: get_thumbnail_url(thumbnail),
@@ -86,7 +88,8 @@ defmodule HoliliveNow.Schedule do
 
   def get_containers(group_container) do
     group_container
-    |> Floki.find(".thumbnail .container")
+    # |> Floki.find(".thumbnail .container")
+    |> Floki.find(".thumbnail")
   end
 
   def get_channel(head) do
@@ -111,5 +114,10 @@ defmodule HoliliveNow.Schedule do
       [src] = Floki.attribute(img, "src")
       src
     end)
+  end
+
+  def get_url(container) do
+    [url] = Floki.attribute(container, "href")
+    url
   end
 end
