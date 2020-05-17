@@ -5,7 +5,9 @@
     <%= for live <- group.lives do %>
       <p><%= time(live.datetime) %></p>
       <p>- <%= live.channel %></p>
-      <img src="<%= live.thumbnail %>">
+      <a href="<%= live.url %>" target="_blank">
+        <img src="<%= live.thumbnail %>">
+      </a>
     <% end %>
   <% end %>
 </div>
