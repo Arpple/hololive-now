@@ -23,8 +23,16 @@ defmodule HoliliveNowWeb.ScheduleLive do
   @impl true
   def mount(_params, _session, socket) do
     lives = Schedule.all()
+    |> Enum.map(&remove_active/1)
     Endpoint.subscribe(@topic)
 
     {:ok, assign(socket, lives: lives)}
+  end
+
+  # for test
+  defp remove_active(date_group) do
+    Map.put(date_group, :lives, Enum.map(date_group.lives, fn l ->
+          Map.put(l, :active?, false)
+    end))
   end
 end

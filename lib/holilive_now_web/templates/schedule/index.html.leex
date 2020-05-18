@@ -1,13 +1,14 @@
-<div class="container">
-  <h1>Now</h1>
-  <%= for group <- @lives do %>
-    <h3><%= group.date %></h3>
+<%= for group <- @lives do %>
+  <h3><%= group.date %></h3>
+  <div class="date-group">
     <%= for live <- group.lives do %>
-      <p><%= time(live.datetime) %></p>
-      <p>- <%= live.channel %></p>
-      <a href="<%= live.url %>" target="_blank">
-        <img src="<%= live.thumbnail %>">
-      </a>
+      <div class="<%= live_class(live) %>">
+        <p><%= time(live.datetime) %></p>
+        <p>- <%= live.channel %></p>
+        <a href="<%= live.url %>" target="_blank">
+          <img src="<%= live.thumbnail %>">
+        </a>
+      </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

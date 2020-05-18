@@ -13,4 +13,11 @@ defmodule HoliliveNowWeb.ScheduleView do
     |> Integer.to_string()
     |> String.pad_leading(2, "0")
   end
+
+  def live_class(live) do
+    case live.active? do
+      true -> "live live-active"
+      false -> "live"
+    end
+  end
 end

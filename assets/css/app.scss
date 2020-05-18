@@ -89,3 +89,20 @@
 .alert:empty {
   display: none;
 }
+
+.date-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.live {
+  margin: 10px;
+}
+
+.live p {
+  margin-bottom: 1rem;
+}
+
+.live-active {
+  border: 3px red solid;
+}

@@ -47,6 +47,7 @@ defmodule HoliliveNow.Schedule do
       channel: get_channel(head),
       thumbnail: get_thumbnail_url(thumbnail),
       icons: get_icons_url(icons),
+      active?: active?(container_a),
     }
   end
  
@@ -119,5 +120,10 @@ defmodule HoliliveNow.Schedule do
   def get_url(container) do
     [url] = Floki.attribute(container, "href")
     url
+  end
+
+  def active?(container_a) do
+    [style] = Floki.attribute(container_a, "style")
+    String.contains?(style, "red")
   end
 end
