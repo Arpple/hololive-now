@@ -1,4 +1,4 @@
-# HoliliveNow
+# HololiveNow
 
 To start your Phoenix server:
 

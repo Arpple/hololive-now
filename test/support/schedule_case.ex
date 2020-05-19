@@ -1,4 +1,4 @@
-defmodule HoliliveNow.ScheduleCase do
+defmodule HololiveNow.ScheduleCase do
   def date_group_container() do
     {"div", [{"class", "container"}],
      [

@@ -1,4 +1,4 @@
-defmodule HoliliveNowWeb.ConnCase do
+defmodule HololiveNowWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule HoliliveNowWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use HoliliveNowWeb.ConnCase, async: true`, although
+  by setting `use HololiveNowWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,20 +22,20 @@ defmodule HoliliveNowWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import HoliliveNowWeb.ConnCase
+      import HololiveNowWeb.ConnCase
 
-      alias HoliliveNowWeb.Router.Helpers, as: Routes
+      alias HololiveNowWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint HoliliveNowWeb.Endpoint
+      @endpoint HololiveNowWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HoliliveNow.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HololiveNow.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(HoliliveNow.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(HololiveNow.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

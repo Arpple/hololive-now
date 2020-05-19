@@ -1,4 +1,4 @@
-defmodule HoliliveNow.DataCase do
+defmodule HololiveNow.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule HoliliveNow.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use HoliliveNow.DataCase, async: true`, although
+  by setting `use HololiveNow.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule HoliliveNow.DataCase do
 
   using do
     quote do
-      alias HoliliveNow.Repo
+      alias HololiveNow.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import HoliliveNow.DataCase
+      import HololiveNow.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HoliliveNow.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HololiveNow.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(HoliliveNow.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(HololiveNow.Repo, {:shared, self()})
     end
 
     :ok

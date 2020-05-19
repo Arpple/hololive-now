@@ -1,0 +1,2 @@
+defmodule HololiveNowWeb.ScheduleViewTest do
+end

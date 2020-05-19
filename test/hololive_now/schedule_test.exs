@@ -1,8 +1,8 @@
-defmodule HoliliveNow.ScheduleTest do
+defmodule HololiveNow.ScheduleTest do
   use ExUnit.Case
 
-  alias HoliliveNow.Schedule
-  alias HoliliveNow.ScheduleCase
+  alias HololiveNow.Schedule
+  alias HololiveNow.ScheduleCase
 
   test "check for group container has date header" do
     group_container = ScheduleCase.date_group_container()
@@ -45,12 +45,12 @@ defmodule HoliliveNow.ScheduleTest do
 
     assert time == ~T[00:01:00]
   end
-  
+
   test "get channel name from head col" do
     channel =
       ScheduleCase.col_head()
       |> Schedule.get_channel()
-    
+
     assert channel == "宝鐘マリン"
   end
 
@@ -58,7 +58,7 @@ defmodule HoliliveNow.ScheduleTest do
     url =
       ScheduleCase.col_thumbnail()
       |> Schedule.get_thumbnail_url()
-    
+
     assert url == "https://img.youtube.com/vi/gliXPuiGjFU/mqdefault.jpg"
   end
 

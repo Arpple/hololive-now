@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :holilive_now,
-  ecto_repos: [HoliliveNow.Repo]
+config :hololive_now,
+  ecto_repos: [HololiveNow.Repo]
 
 # Configures the endpoint
-config :holilive_now, HoliliveNowWeb.Endpoint,
+config :hololive_now, HololiveNowWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "2B2SXjhW0h1ESHTEt6JFrlJ440upBYzsUiV9E8UnjfG2RB5fTYLv8BstCt9JAmhN",
-  render_errors: [view: HoliliveNowWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: HoliliveNow.PubSub,
+  render_errors: [view: HololiveNowWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: HololiveNow.PubSub,
   live_view: [signing_salt: "RdfUSRSt"]
 
 # Configures Elixir's Logger

@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :holilive_now, HoliliveNow.Repo,
+config :hololive_now, HololiveNow.Repo,
   username: "postgres",
   password: "postgres",
-  database: "holilive_now_dev",
+  database: "hololive_now_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :holilive_now, HoliliveNow.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :holilive_now, HoliliveNowWeb.Endpoint,
+config :hololive_now, HololiveNowWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -55,13 +55,13 @@ config :holilive_now, HoliliveNowWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :holilive_now, HoliliveNowWeb.Endpoint,
+config :hololive_now, HololiveNowWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/holilive_now_web/(live|views)/.*(ex)$",
-      ~r"lib/holilive_now_web/templates/.*(eex)$"
+      ~r"lib/hololive_now_web/(live|views)/.*(ex)$",
+      ~r"lib/hololive_now_web/templates/.*(eex)$"
     ]
   ]
 
