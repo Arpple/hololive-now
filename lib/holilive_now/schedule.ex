@@ -89,7 +89,6 @@ defmodule HoliliveNow.Schedule do
 
   def get_containers(group_container) do
     group_container
-    # |> Floki.find(".thumbnail .container")
     |> Floki.find(".thumbnail")
   end
 

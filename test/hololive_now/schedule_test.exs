@@ -50,6 +50,7 @@ defmodule HoliliveNow.ScheduleTest do
     channel =
       ScheduleCase.col_head()
       |> Schedule.get_channel()
+    
     assert channel == "宝鐘マリン"
   end
 
