@@ -1,8 +1,8 @@
 defmodule HololiveNow.Task do
   use Task
 
-  # 5 minute
-  @time 1000 * 60 * 5
+  # 1 minute
+  @time 1000 * 60
 
   def start_link(_arg) do
     Task.start_link(&run/0)

@@ -111,10 +111,40 @@
   padding: 5px;
 }
 
+a {
+  color: black;
+}
+
+.live-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.live-time {
+  font-weight: 400;
+}
+
+.live-ch {
+  text-align: right;
+}
+
 .live p {
   margin-bottom: 1rem;
 }
 
 .live-active {
   border: 3px red solid;
+}
+
+.footer {
+  width: 100%;
+  background-color: #303030;
+  color: white;
+  text-align: center;
+  margin-top: 100px;
+  padding: 0px;
+}
+
+.footer p {
+  margin: 1rem;
 }

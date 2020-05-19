@@ -4,13 +4,15 @@
   </div>
   <div class="date-group">
     <%= for live <- group.lives do %>
-      <div class="<%= live_class(live) %>">
-        <p><%= time(live.datetime) %></p>
-        <p>- <%= live.channel %></p>
-        <a href="<%= live.url %>" target="_blank">
+      <a href="<%= live.url %>" target="_blank">
+        <div class="<%= live_class(live) %>">
+          <div class="live-header">
+            <p class="live-time"><%= time(live.datetime) %></p>
+            <p class="live-ch"><%= live.channel %></p>
+          </div>
           <img src="<%= live.thumbnail %>">
-        </a>
-      </div>
+        </div>
+      </a>
     <% end %>
   </div>
 <% end %>
