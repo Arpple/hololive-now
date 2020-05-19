@@ -7,6 +7,7 @@ defmodule HoliliveNowWeb.ScheduleLive do
   @topic "update"
 
   def update() do
+    IO.puts("update...")
     state = Schedule.all()
     Endpoint.broadcast(@topic, "update", %{ lives: state })
   end
@@ -16,7 +17,6 @@ defmodule HoliliveNowWeb.ScheduleLive do
   end
 
   def handle_info(%{topic: @topic, payload: state}, socket) do
-    IO.inspect("wow")
     {:noreply, assign(socket, state)}
   end
 

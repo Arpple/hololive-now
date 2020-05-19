@@ -3,6 +3,10 @@ defmodule HoliliveNowWeb.ScheduleView do
 
   alias HololiveNowWeb.ScheduleLive
 
+  def date_str(date) do
+    to_string(date.month) <> "/" <> to_string(date.day)
+  end
+
   def time(datetime) do
     %{ hour: hour, minute: minute } = datetime
     time_str(hour) <> ":" <> time_str(minute)

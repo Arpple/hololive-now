@@ -1,5 +1,7 @@
 <%= for group <- @lives do %>
-  <h3><%= group.date %></h3>
+  <div class="date">
+    <b><%= date_str(group.date) %></b>
+  </div>
   <div class="date-group">
     <%= for live <- group.lives do %>
       <div class="<%= live_class(live) %>">

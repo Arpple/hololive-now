@@ -90,6 +90,16 @@
   display: none;
 }
 
+.date {
+  background-color: #303030;
+  border-radius: 4px;
+  color: skyblue;
+  margin-top: 20px;
+  margin-botton: 20px;
+  padding: 10px;
+  text-align: center;
+}
+
 .date-group {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -97,6 +107,8 @@
 
 .live {
   margin: 10px;
+  border: 1px gray solid;
+  padding: 5px;
 }
 
 .live p {
