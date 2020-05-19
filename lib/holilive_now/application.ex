@@ -14,9 +14,10 @@ defmodule HoliliveNow.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HoliliveNow.PubSub},
       # Start the Endpoint (http/https)
-      HoliliveNowWeb.Endpoint
+      HoliliveNowWeb.Endpoint,
       # Start a worker by calling: HoliliveNow.Worker.start_link(arg)
       # {HoliliveNow.Worker, arg}
+      HololiveNow.Task,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
