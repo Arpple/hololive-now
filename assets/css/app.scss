@@ -90,11 +90,18 @@
   display: none;
 }
 
+/* custom */
+
+.container {
+  min-width: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+}
+
 .date {
-  background-color: #303030;
-  border-radius: 4px;
-  color: skyblue;
-  margin-top: 20px;
   margin-botton: 20px;
   padding: 10px;
   text-align: center;
@@ -138,13 +145,36 @@ a {
 
 .footer {
   width: 100%;
-  background-color: #303030;
   color: white;
   text-align: center;
-  margin-top: 100px;
   padding: 0px;
 }
 
 .footer p {
-  margin: 1rem;
+  margin: 0px;
 }
+
+.navblock {
+  background-color: #303030;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.navblock-text {
+  color: skyblue;
+}
+
+.navblock-text a {
+  color: skyblue;
+}
+
+.navblock-text a:hover {
+  color: white;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+}
+
