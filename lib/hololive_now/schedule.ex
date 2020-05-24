@@ -1,8 +1,12 @@
 defmodule HololiveNow.Schedule do
-  @url "https://schedule.hololive.tv/lives/hololive"
+  @url "https://schedule.hololive.tv/lives"
 
-  def all() do
-    %{body: body} = HTTPoison.get!(@url)
+  def all(nil), do: get("")
+  def all(group), do: get("/" <> group)
+
+  defp get(path) do
+    url = @url <> path
+    %{body: body} = HTTPoison.get!(url)
 
     group_containers = body
     |> Floki.parse_document!()
@@ -21,8 +25,12 @@ defmodule HololiveNow.Schedule do
 
         [block | acc]
       else
-        [block | rem] = acc
-        [ %{block | containers: block.containers ++ get_containers(group_container)} | rem ]
+        case acc do
+          [] -> acc
+
+          [block | rem] ->
+            [ %{block | containers: block.containers ++ get_containers(group_container)} | rem ]
+        end
       end
     end)
 

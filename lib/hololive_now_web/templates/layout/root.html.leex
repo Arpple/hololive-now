@@ -12,8 +12,20 @@
   <body>
     <header>
     </header>
-    <%= @inner_content %>
-    <div class="footer">
+    <div class="wrapper">
+      <div class="sidebar navblock navblock-text">
+        <a href="/">全体</a>
+        <a href="/hololive">ホロライブ</a>
+        <a href="/holostars">ホロスターズ</a>
+        <a href="/innk">イノナカ</a>
+        <a href="/china">China</a>
+        <a href="/indonesia">Indonesia</a>
+      </div>
+      <div class="content">
+        <%= @inner_content %>
+      </div>
+    </div>
+    <div class="footer navblock">
       <p> All content from Hololive @ cover corp. </p>
       <p> Web by Arpple</p>
     </div>

@@ -21,8 +21,9 @@ defmodule HololiveNowWeb.ScheduleLive do
   end
 
   @impl true
-  def mount(_params, _session, socket) do
-    lives = Schedule.all()
+  def mount(params, _session, socket) do
+    group = params["group"]
+    lives = Schedule.all(group)
     Endpoint.subscribe(@topic)
 
     {:ok, assign(socket, lives: lives)}
