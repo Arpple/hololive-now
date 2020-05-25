@@ -2,13 +2,13 @@ defmodule HololiveNow.Schedule do
   @url "https://schedule.hololive.tv/lives"
 
   def all(nil), do: get("")
-  def all(group), do: get("/" <> group)
+  def all(group), do: get("/#{group}")
 
   defp get(path) do
     url = @url <> path
     %{body: body} = HTTPoison.get!(url)
 
-    group_containers = body
+    body
     |> Floki.parse_document!()
     |> Floki.find("#all .container")
     |> read_group_containers()

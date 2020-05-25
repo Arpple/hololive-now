@@ -12,10 +12,12 @@ defmodule HololiveNowWeb.ScheduleLive do
     Endpoint.broadcast(@topic, "update", %{ lives: state })
   end
 
+  @impl true
   def render(assigns) do
     ScheduleView.render("index.html", assigns)
   end
 
+  @impl true
   def handle_info(%{topic: @topic, payload: state}, socket) do
     {:noreply, assign(socket, state)}
   end
