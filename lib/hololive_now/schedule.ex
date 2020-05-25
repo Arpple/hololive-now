@@ -1,6 +1,7 @@
 defmodule HololiveNow.Schedule do
   @url "https://schedule.hololive.tv/lives"
 
+  def all(), do: get("")
   def all(nil), do: get("")
   def all(group), do: get("/#{group}")
 

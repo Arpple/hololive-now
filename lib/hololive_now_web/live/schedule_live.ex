@@ -3,11 +3,11 @@ defmodule HololiveNowWeb.ScheduleLive do
   alias HololiveNow.Schedule
   alias HololiveNowWeb.ScheduleView
   alias HololiveNowWeb.Endpoint
+  require Logger
 
   @topic "update"
 
   def update() do
-    IO.puts("update...")
     state = Schedule.all()
     Endpoint.broadcast(@topic, "update", %{ lives: state })
   end
