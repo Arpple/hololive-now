@@ -49,7 +49,10 @@ defmodule HololiveNow.Schedule do
     [container] = Floki.find(container_a, ".container")
     [row] = Floki.children(container)
     [head, thumbnail, icons] = Floki.children(row)
-    {:ok, datetime} = NaiveDateTime.new(date, get_time(head))
+    
+    {:ok, ndatetime} = NaiveDateTime.new(date, get_time(head))
+    datetime = DateTime.from_naive!(ndatetime, "Asia/Tokyo")
+
     %{
       url: get_url(container_a),
       datetime: datetime,

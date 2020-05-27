@@ -3,6 +3,15 @@ defmodule HololiveNowWeb.ScheduleView do
 
   alias HololiveNowWeb.ScheduleLive
 
+  def thumbnail_url(%{datetime: datetime, thumbnail: thumbnail}) do
+    now = Timex.now()
+    case Timex.compare(now, datetime) do
+      # live in future
+      -1 -> thumbnail <> "?q=" <> Integer.to_string(DateTime.to_unix(now))
+      _ -> thumbnail
+    end
+  end
+
   def date_str(date) do
     to_string(date.month) <> "/" <> to_string(date.day)
   end

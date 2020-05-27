@@ -10,7 +10,7 @@
             <p class="live-time"><%= time(live.datetime) %></p>
             <p class="live-ch"><%= live.channel %></p>
           </div>
-          <img src="<%= live.thumbnail %>">
+          <img src="<%= thumbnail_url(live) %>">
         </div>
       </a>
     <% end %>
