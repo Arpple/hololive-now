@@ -8,7 +8,7 @@ defmodule HololiveNow.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      HololiveNow.Repo,
+      # HololiveNow.Repo,
       # Start the Telemetry supervisor
       HololiveNowWeb.Telemetry,
       # Start the PubSub system

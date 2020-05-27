@@ -5,11 +5,23 @@ defmodule HololiveNowWeb.ScheduleLive do
   alias HololiveNowWeb.Endpoint
   require Logger
 
-  @topic "update"
+  @event_update "update"
+
+  @all_groups [
+    nil,
+    "hololive",
+    "holostars",
+    "innk",
+    "china",
+    "indonesia",
+  ]
 
   def update() do
-    state = Schedule.all()
-    Endpoint.broadcast(@topic, "update", %{ lives: state })
+    for group <- @all_groups do
+      topic = group_topic(group)
+      state = Schedule.all(topic)
+      Endpoint.broadcast(topic, @event_update, %{ lives: state })
+    end
   end
 
   @impl true
@@ -18,7 +30,7 @@ defmodule HololiveNowWeb.ScheduleLive do
   end
 
   @impl true
-  def handle_info(%{topic: @topic, payload: state}, socket) do
+  def handle_info(%{event: @event_update, payload: state}, socket) do
     {:noreply, assign(socket, state)}
   end
 
@@ -26,7 +38,10 @@ defmodule HololiveNowWeb.ScheduleLive do
   def mount(params, _session, socket) do
     group = params["group"]
     lives = Schedule.all(group)
-    Endpoint.subscribe(@topic)
+
+    group
+    |> group_topic()
+    |> Endpoint.subscribe()
 
     {:ok, assign(socket, lives: lives)}
   end
@@ -43,4 +58,7 @@ defmodule HololiveNowWeb.ScheduleLive do
           Map.put(l, :active?, true)
     end))
   end
+
+  defp group_topic(nil), do: ""
+  defp group_topic(group), do: group
 end
