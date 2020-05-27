@@ -38,12 +38,13 @@ defmodule HololiveNowWeb.ScheduleLive do
   def mount(params, _session, socket) do
     group = params["group"]
     lives = Schedule.all(group)
+    tz = params["tz"] || "Asia/Tokyo"
 
     group
     |> group_topic()
     |> Endpoint.subscribe()
 
-    {:ok, assign(socket, lives: lives)}
+    {:ok, assign(socket, lives: lives, tz: tz)}
   end
 
   # for test

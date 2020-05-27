@@ -7,7 +7,7 @@
       <a href="<%= live.url %>" target="_blank">
         <div class="<%= live_class(live) %>">
           <div class="live-header">
-            <p class="live-time"><%= time(live.datetime) %></p>
+            <p class="live-time"><%= time(live.datetime, @tz) %></p>
             <p class="live-ch"><%= live.channel %></p>
           </div>
           <img src="<%= thumbnail_url(live) %>">
