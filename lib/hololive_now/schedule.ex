@@ -3,6 +3,7 @@ defmodule HololiveNow.Schedule do
 
   def all(), do: get("")
   def all(nil), do: get("")
+  def all(""), do: get("")
   def all(group), do: get("/#{group}")
 
   defp get(path) do

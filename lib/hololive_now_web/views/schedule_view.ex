@@ -30,9 +30,22 @@ defmodule HololiveNowWeb.ScheduleView do
   end
 
   def live_class(live) do
-    case live.active? do
-      true -> "live live-active"
-      false -> "live"
+    "live"
+    |> active_class(live)
+    |> past_class(live)
+  end
+
+  defp active_class(class, %{active?: true}), do: class <> " live-active"
+  defp active_class(class, _live), do: class
+
+  defp past_class(class, %{active?: true}), do: class
+  
+  defp past_class(class, %{datetime: datetime}) do
+    now = Timex.now()
+    case Timex.compare(now, datetime) do
+      # live in past
+      1 -> class <> " live-past"
+      _ -> class
     end
   end
-end
+ end

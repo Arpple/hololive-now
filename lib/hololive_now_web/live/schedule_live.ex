@@ -30,8 +30,8 @@ defmodule HololiveNowWeb.ScheduleLive do
   end
 
   @impl true
-  def handle_info(%{event: @event_update, payload: state}, socket) do
-    {:noreply, assign(socket, state)}
+  def handle_info(%{event: @event_update, payload: %{ lives: lives }}, socket) do
+    {:noreply, assign(socket, lives: lives)}
   end
 
   @impl true
