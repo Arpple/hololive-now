@@ -16,6 +16,7 @@ defmodule HololiveNow.Schedule do
     |> Floki.find("#all .container")
     |> read_group_containers()
     |> convert_to_lives()
+    |> flatten_dategroup()
   end
 
   def read_group_containers(group_containers) do
@@ -45,6 +46,11 @@ defmodule HololiveNow.Schedule do
       lives = Enum.map(block.containers, fn container -> read_container(block.date, container) end)
       %{ date: block.date, lives: lives }
     end)
+  end
+
+  def flatten_dategroup(date_groups) do
+    date_groups
+    |> Enum.flat_map(fn group -> group.lives end)
   end
 
   def read_container(date, container_a) do

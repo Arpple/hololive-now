@@ -23,10 +23,11 @@ defmodule HololiveNowWeb.ScheduleLive do
 
   @impl true
   def mount(params, _session, socket) do
-    now = Timex.now()
     group = params["group"]
-    lives = Schedule.all(group)
     tz = params["tz"] || "Asia/Tokyo"
+
+    now = Timex.now()
+    lives = Schedule.all(group)
 
     group
     |> get_topic()

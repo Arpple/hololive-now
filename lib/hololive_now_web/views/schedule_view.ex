@@ -36,4 +36,23 @@ defmodule HololiveNowWeb.ScheduleView do
       _ -> class
     end
   end
+
+  def group_by_date(lives, tz) do
+    lives
+    |> Enum.group_by(fn %Live{ start_time: start_time } ->
+      Timex.Timezone.convert(start_time, tz)
+      |> DateTime.to_date()
+    end)
+    |> Enum.map(fn {date, grouped_lives} ->
+      {date, grouped_lives}
+    end)
+  end
+
+  defp create_group(%Live{ start_time: start_time } = live) do
+    { DateTime.to_date(start_time), [live] }
+  end
+
+  defp add_group([current_group | _], %Live{} = live) do
+    
+  end
  end

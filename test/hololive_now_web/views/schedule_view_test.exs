@@ -76,4 +76,18 @@ defmodule HololiveNowWeb.ScheduleViewTest do
 
     assert ScheduleView.live_class(live, now) == "live"
   end
+
+  test "group lives by date of timezone" do
+    live_1 = %Live{ start_time: ~U[2000-01-01 13:00:00Z] }
+    live_2 = %Live{ start_time: ~U[2000-01-01 14:00:00Z] }
+    live_3 = %Live{ start_time: ~U[2000-01-01 15:00:00Z] }
+    live_4 = %Live{ start_time: ~U[2000-01-01 16:00:00Z] }
+
+    group = ScheduleView.group_by_date([live_1, live_2, live_3, live_4], "Asia/Tokyo")
+
+    assert [
+      { ~D[2000-01-01], [^live_1, ^live_2] },
+      { ~D[2000-01-02], [^live_3, ^live_4] },
+    ] = group
+  end
 end

@@ -1,9 +1,9 @@
-<%= for group <- @lives do %>
+<%= for {date, lives} <- group_by_date(@lives, @tz) do %>
   <div class="date navblock navblock-text">
-    <b><%= date_str(group.date) %></b>
+    <b><%= date_str(date) %></b>
   </div>
   <div class="date-group">
-    <%= for live <- group.lives do %>
+    <%= for live <- lives do %>
       <a href="<%= live.url %>" target="_blank">
         <div class="<%= live_class(live, @now) %>">
           <div class="live-header">
