@@ -1,4 +1,6 @@
 defmodule HololiveNow.Schedule do
+  alias HololiveNow.Live
+  
   @url "https://schedule.hololive.tv/lives"
 
   def all(), do: get("")
@@ -54,9 +56,9 @@ defmodule HololiveNow.Schedule do
     {:ok, ndatetime} = NaiveDateTime.new(date, get_time(head))
     datetime = DateTime.from_naive!(ndatetime, "Asia/Tokyo")
 
-    %{
+    %Live{
       url: get_url(container_a),
-      datetime: datetime,
+      start_time: datetime,
       channel: get_channel(head),
       thumbnail: get_thumbnail_url(thumbnail),
       icons: get_icons_url(icons),

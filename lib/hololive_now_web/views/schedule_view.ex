@@ -2,10 +2,11 @@ defmodule HololiveNowWeb.ScheduleView do
   use HololiveNowWeb, :view
 
   alias HololiveNowWeb.ScheduleLive
+  alias HololiveNow.Live
 
-  def thumbnail_url(%{datetime: datetime, thumbnail: thumbnail}) do
+  def thumbnail_url(%Live{start_time: start_time, thumbnail: thumbnail}) do
     now = Timex.now()    
-    case Timex.compare(now, datetime) do
+    case Timex.compare(now, start_time) do
       # live in future
       -1 -> thumbnail <> "?q=" <> Integer.to_string(DateTime.to_unix(now))
       _ -> thumbnail
@@ -40,11 +41,10 @@ defmodule HololiveNowWeb.ScheduleView do
 
   defp past_class(class, %{active?: true}), do: class
   
-  defp past_class(class, %{datetime: datetime}) do
+  defp past_class(class, %Live{} = live) do
     now = Timex.now()
-    case Timex.compare(now, datetime) do
-      # live in past
-      1 -> class <> " live-past"
+    case Live.end?(live, now) do
+      true -> class <> " live-past"
       _ -> class
     end
   end
