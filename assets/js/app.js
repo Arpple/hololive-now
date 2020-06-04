@@ -31,3 +31,11 @@ liveSocket.connect()
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
+
+window.onload = () => {
+  const lives = document.getElementsByClassName("live-active")
+
+  if (lives.length > 0) {
+    lives[0].scrollIntoView({ behavior: "smooth" })
+  }
+}
