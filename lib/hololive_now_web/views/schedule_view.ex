@@ -21,19 +21,11 @@ defmodule HololiveNowWeb.ScheduleView do
   end
 
   def live_class(live, now) do
-    "live"
-    |> active_class(live)
-    |> past_class(live, now)
-  end
-
-  defp active_class(class, %{active?: true}), do: class <> " live-active"
-  defp active_class(class, _live), do: class
-
-  defp past_class(class, %Live{active?: true}, _now), do: class
-  defp past_class(class, %Live{} = live, now) do
-    case Live.end?(live, now) do
-      true -> class <> " live-ended"
-      _ -> class
+    case Live.state(live, now) do
+      :future -> "live"
+      :active -> "live live-active"
+      :unsure -> "live live-unsure"
+      :ended -> "live live-ended"
     end
   end
 

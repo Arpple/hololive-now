@@ -44,7 +44,7 @@ defmodule HololiveNowWeb.ScheduleViewTest do
     assert ScheduleView.time(live, "Asia/Bangkok") == "19:03"
   end
 
-  test "get css class for end live" do
+  test "get css class for ended live" do
     live = %Live{
       start_time: ~U[2000-01-01 12:00:00Z],
       active?: false,
@@ -53,6 +53,17 @@ defmodule HololiveNowWeb.ScheduleViewTest do
     now = ~U[2000-01-01 13:00:00Z]
 
     assert ScheduleView.live_class(live, now) == "live live-ended"
+  end
+  
+  test "get css class for unsure ended live" do
+    live = %Live{
+      start_time: ~U[2000-01-01 12:00:00Z],
+      active?: false,
+    }
+
+    now = ~U[2000-01-01 12:05:00Z]
+
+    assert ScheduleView.live_class(live, now) == "live live-unsure"
   end
 
   test "get css class for active live" do
