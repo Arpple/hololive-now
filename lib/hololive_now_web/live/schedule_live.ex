@@ -6,6 +6,7 @@ defmodule HololiveNowWeb.ScheduleLive do
   require Logger
 
   @event_update "update"
+  @event_keep_alive "keep_alive"
 
   @all_groups [
     nil,
@@ -33,11 +34,14 @@ defmodule HololiveNowWeb.ScheduleLive do
     |> get_topic()
     |> Endpoint.subscribe()
 
+    Endpoint.subscribe(@event_keep_alive)
+
     {:ok, assign(socket, lives: lives, tz: tz, now: now)}
   end
 
   def update() do
     now = Timex.now()
+    IO.puts(DateTime.to_string(now) <> " update")
 
     for group <- @all_groups do
       topic = get_topic(group)
@@ -45,23 +49,32 @@ defmodule HololiveNowWeb.ScheduleLive do
       Endpoint.broadcast(topic, @event_update, %{ lives: lives, now: now })
     end
   end
-  
+
+  def keep_alive() do
+    Endpoint.broadcast(@event_keep_alive, @event_keep_alive, %{})
+  end
+
   @impl true
   def handle_info(%{event: @event_update, payload: %{ lives: lives, now: now }}, socket) do
     {:noreply, assign(socket, lives: lives, now: now)}
   end
 
-  # for test
-  defp remove_active(date_group) do
-    Map.put(date_group, :lives, Enum.map(date_group.lives, fn l ->
-      Map.put(l, :active?, false)
-    end))
+  @impl true
+  def handle_info(%{event: @event_keep_alive}, socket) do
+    {:noreply, socket}
   end
 
-  defp force_active(date_group) do
-    Map.put(date_group, :lives, Enum.map(date_group.lives, fn l ->
-      Map.put(l, :active?, true)
-    end))
+  # for test
+  defp remove_active(lives) do
+    Enum.map(lives, fn live ->
+      Map.put(live, :active?, false)
+    end)
+  end
+
+  defp force_active(lives) do
+    Enum.map(lives, fn live ->
+      Map.put(live, :active?, true)
+    end)
   end
 
   defp get_topic(nil), do: ""

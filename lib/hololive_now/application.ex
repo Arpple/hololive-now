@@ -17,7 +17,8 @@ defmodule HololiveNow.Application do
       HololiveNowWeb.Endpoint,
       # Start a worker by calling: HololiveNow.Worker.start_link(arg)
       # {HololiveNow.Worker, arg}
-      HololiveNow.Task,
+      HololiveNowWeb.Task.Update,
+      HololiveNowWeb.Task.KeepAlive,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -1,8 +1,8 @@
-defmodule HololiveNow.Task do
+defmodule HololiveNowWeb.Task.KeepAlive do
   use Task
 
-  # 1 minute
-  @time 1000 * 60
+  # 30 sec
+  @time 1000 * 30
 
   def start_link(_arg) do
     Task.start_link(&run/0)
@@ -11,7 +11,7 @@ defmodule HololiveNow.Task do
   def run() do
     receive do
     after @time ->
-      HololiveNowWeb.ScheduleLive.update()
+      HololiveNowWeb.ScheduleLive.keep_alive()
       run()
     end
   end
