@@ -99,6 +99,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: 2fr 8fr;
+  column-gap: 10px;
 }
 
 .date {

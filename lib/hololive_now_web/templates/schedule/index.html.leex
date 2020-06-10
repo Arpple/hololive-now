@@ -1,18 +1,30 @@
-<%= for {date, lives} <- group_by_date(@lives, @tz) do %>
-  <div class="date navblock navblock-text">
-    <b><%= date_str(date) %></b>
+<div class="wrapper">
+  <div class="sidebar navblock navblock-text">
+    <a href="/?tz=<%= @tz %>">全体</a>
+    <a href="/hololive?tz=<%= @tz %>">ホロライブ</a>
+    <a href="/holostars?tz=<%= @tz %>">ホロスターズ</a>
+    <a href="/innk?tz=<%= @tz %>">イノナカ</a>
+    <a href="/china?tz=<%= @tz %>">China</a>
+    <a href="/indonesia?tz=<%= @tz %>">Indonesia</a>
   </div>
-  <div class="date-group">
-    <%= for live <- lives do %>
-      <a href="<%= live.url %>" target="_blank">
-        <div class="<%= live_class(live, @now) %>">
-          <div class="live-header">
-            <p class="live-time"><%= time(live, @tz) %></p>
-            <p class="live-ch"><%= live.channel %></p>
-          </div>
-          <img src="<%= thumbnail_url(live, @now) %>">
-        </div>
-      </a>
+  <div class="content">
+    <%= for {date, lives} <- group_by_date(@lives, @tz) do %>
+      <div class="date navblock navblock-text">
+        <b><%= date_str(date) %></b>
+      </div>
+      <div class="date-group">
+        <%= for live <- lives do %>
+          <a href="<%= live.url %>" target="_blank">
+            <div class="<%= live_class(live, @now) %>">
+              <div class="live-header">
+                <p class="live-time"><%= time(live, @tz) %></p>
+                <p class="live-ch"><%= live.channel %></p>
+              </div>
+              <img src="<%= thumbnail_url(live, @now) %>">
+            </div>
+          </a>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>
