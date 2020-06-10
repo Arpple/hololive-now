@@ -54,7 +54,7 @@ defmodule HololiveNowWeb.ScheduleViewTest do
 
     assert ScheduleView.live_class(live, now) == "live live-ended"
   end
-  
+
   test "get css class for unsure ended live" do
     live = %Live{
       start_time: ~U[2000-01-01 12:00:00Z],
@@ -100,5 +100,10 @@ defmodule HololiveNowWeb.ScheduleViewTest do
       { ~D[2000-01-01], [^live_1, ^live_2] },
       { ~D[2000-01-02], [^live_3, ^live_4] },
     ] = group
+  end
+
+  test "create redirect url with timezone query" do
+    assert ScheduleView.redirect_url("/", "Asia/Tokyo") == "/?tz=Asia/Tokyo"
+    assert ScheduleView.redirect_url("/hololive", "Asia/Bangkok") == "/hololive?tz=Asia/Bangkok"
   end
 end

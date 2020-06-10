@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="sidebar navblock navblock-text">
-    <a href="/?tz=<%= @tz %>">全体</a>
-    <a href="/hololive?tz=<%= @tz %>">ホロライブ</a>
-    <a href="/holostars?tz=<%= @tz %>">ホロスターズ</a>
-    <a href="/innk?tz=<%= @tz %>">イノナカ</a>
-    <a href="/china?tz=<%= @tz %>">China</a>
-    <a href="/indonesia?tz=<%= @tz %>">Indonesia</a>
+    <a href="<%= redirect_url("/", @tz) %>">全体</a>
+    <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
+    <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
+    <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
+    <a href="<%= redirect_url("/china", @tz) %>">China</a>
+    <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
   </div>
   <div class="content">
     <%= for {date, lives} <- group_by_date(@lives, @tz) do %>

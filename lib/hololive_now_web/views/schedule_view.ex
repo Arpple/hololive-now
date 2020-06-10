@@ -37,4 +37,8 @@ defmodule HololiveNowWeb.ScheduleView do
     end)
     |> Enum.map(fn x -> x end) # convert to tuple to ensure ordering :\
   end
+
+  def redirect_url(path, timezone) do
+    path <> "?tz=" <> timezone
+  end
  end
