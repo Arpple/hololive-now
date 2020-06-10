@@ -6,7 +6,6 @@ defmodule HololiveNowWeb.ScheduleLive do
   require Logger
 
   @event_update "update"
-  @event_keep_alive "keep_alive"
 
   @all_groups [
     nil,
@@ -34,8 +33,6 @@ defmodule HololiveNowWeb.ScheduleLive do
     |> get_topic()
     |> Endpoint.subscribe()
 
-    Endpoint.subscribe(@event_keep_alive)
-
     {:ok, assign(socket, lives: lives, tz: tz, now: now)}
   end
 
@@ -50,18 +47,9 @@ defmodule HololiveNowWeb.ScheduleLive do
     end
   end
 
-  def keep_alive() do
-    Endpoint.broadcast(@event_keep_alive, @event_keep_alive, %{})
-  end
-
   @impl true
   def handle_info(%{event: @event_update, payload: %{ lives: lives, now: now }}, socket) do
     {:noreply, assign(socket, lives: lives, now: now)}
-  end
-
-  @impl true
-  def handle_info(%{event: @event_keep_alive}, socket) do
-    {:noreply, socket}
   end
 
   # for test
