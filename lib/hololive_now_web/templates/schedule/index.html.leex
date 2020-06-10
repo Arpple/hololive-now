@@ -6,6 +6,11 @@
     <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
     <a href="<%= redirect_url("/china", @tz) %>">China</a>
     <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
+    <select id="tz-select" phx-change="tz">
+      <%= for zone <- Tzdata.zone_list() do %>
+        <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
+      <% end %>
+    </select>
   </div>
   <div class="content">
     <%= for {date, lives} <- group_by_date(@lives, @tz) do %>
