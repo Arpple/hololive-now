@@ -32,10 +32,24 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
 
-window.onload = () => {
+function setupTimezoneSelect() {
+  const elem = document.getElementById("tz-select")
+  elem.onchange = function() {
+    const tz = this.value
+    const url = window.location.href.split("?")[0]
+    window.location.replace(url + "?tz=" + tz)
+  }
+}
+
+function scrollToActive() {
   const lives = document.getElementsByClassName("live-active")
 
   if (lives.length > 0) {
     lives[0].scrollIntoView({ behavior: "smooth" })
   }
+}
+
+window.onload = () => {
+  setupTimezoneSelect()
+  scrollToActive()
 }

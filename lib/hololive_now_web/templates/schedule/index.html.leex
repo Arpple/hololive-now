@@ -1,16 +1,21 @@
 <div class="wrapper">
   <div class="sidebar navblock navblock-text">
-    <a href="<%= redirect_url("/", @tz) %>">全体</a>
-    <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
-    <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
-    <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
-    <a href="<%= redirect_url("/china", @tz) %>">China</a>
-    <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
-    <select id="tz-select" phx-change="tz">
-      <%= for zone <- Tzdata.zone_list() do %>
-        <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
-      <% end %>
-    </select>
+    <div>
+      <a href="<%= redirect_url("/", @tz) %>">全体</a>
+      <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
+      <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
+      <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
+      <a href="<%= redirect_url("/china", @tz) %>">China</a>
+      <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
+    </div>
+    <div class="nav-timezone nav-break text-white">
+      <p>Timezone</p>
+      <select id="tz-select" class="bg-white mav=break">
+        <%= for zone <- Tzdata.zone_list() do %>
+          <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
+        <% end %>
+      </select>
+    </div>
   </div>
   <div class="content">
     <%= for {date, lives} <- group_by_date(@lives, @tz) do %>
