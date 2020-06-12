@@ -1,18 +1,18 @@
 defmodule HololiveNowWeb.Task.Update do
-  use Task
+  use GenServer
 
   # 1 minute
   @time 1000 * 60
 
-  def start_link(_arg) do
-    Task.start_link(&run/0)
+  def init(_state), do: {:ok, nil}
+
+  def start_link(opts) do
+    {:ok, pid} = GenServer.start_link(__MODULE__, opts)
+    :timer.apply_interval(@time, __MODULE__, :run, [])
+    {:ok, pid}
   end
 
   def run() do
-    receive do
-    after @time ->
-      HololiveNowWeb.ScheduleLive.update()
-      run()
-    end
+    HololiveNowWeb.ScheduleLive.update()
   end
 end
