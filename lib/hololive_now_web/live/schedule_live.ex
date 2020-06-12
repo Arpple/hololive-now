@@ -3,9 +3,8 @@ defmodule HololiveNowWeb.ScheduleLive do
   alias HololiveNow.Schedule
   alias HololiveNowWeb.ScheduleView
   alias HololiveNowWeb.Endpoint
+  alias Phoenix.PubSub
   require Logger
-
-  @event_update "update"
 
   @all_groups [
     nil,
@@ -29,9 +28,10 @@ defmodule HololiveNowWeb.ScheduleLive do
     now = Timex.now()
     lives = Schedule.all(group)
 
-    group
+    topic = group
     |> get_topic()
-    |> Endpoint.subscribe()
+
+    PubSub.subscribe(HololiveNow.PubSub, topic)
 
     {:ok, assign(socket, lives: lives, tz: tz, now: now)}
   end
@@ -43,12 +43,12 @@ defmodule HololiveNowWeb.ScheduleLive do
     for group <- @all_groups do
       topic = get_topic(group)
       lives = Schedule.all(group)
-      Endpoint.broadcast(topic, @event_update, %{ lives: lives, now: now })
+      PubSub.broadcast(HololiveNow.PubSub, topic, {:update, %{ lives: lives, now: now }})
     end
   end
 
   @impl true
-  def handle_info(%{event: @event_update, payload: %{ lives: lives, now: now }}, socket) do
+  def handle_info({:update, %{ lives: lives, now: now }}, socket) do
     {:noreply, assign(socket, lives: lives, now: now)}
   end
 
