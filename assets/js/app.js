@@ -51,5 +51,5 @@ function scrollToActive() {
 
 window.onload = () => {
   setupTimezoneSelect()
-  // scrollToActive()
+  scrollToActive()
 }
