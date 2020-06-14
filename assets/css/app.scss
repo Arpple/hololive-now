@@ -92,35 +92,46 @@
 
 /* custom */
 
-.container {
-  min-width: 100%;
+
+
+.sidebar {
+  background-color: gray;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 2fr 8fr;
-  column-gap: 10px;
+.content {
 }
 
 .date {
-  margin-botton: 20px;
-  padding: 10px;
-  text-align: center;
+  margin: 0;
+  padding: 1em;
+  font-weight: bold;
 }
 
-.date-group {
+.lives {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: max-content;
+  column-gap: 1em;
+  row-gap: 1em;
+  margin: 1em 0;
 }
 
 .live {
-  margin: 10px;
-  border: 1px gray solid;
-  padding: 5px;
+  background-color: white;
+  color: black;
+  font-weight: 300;
+  border: 1px solid gray;
+  padding: 0.5em;
+  text-align: center;
 }
 
-a {
-  color: black;
+.live p {
+  margin: 0 auto;
+  margin-bottom: 0.5em;
+}
+
+.live img {
+  width: 100%;
 }
 
 .live-header {
@@ -128,87 +139,158 @@ a {
   grid-template-columns: 1fr 1fr;
 }
 
-.live-time {
-  font-weight: 400;
+.live-header p {
 }
 
 .live-ch {
+  width: 100%;
   text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.live p {
-  margin-bottom: 1rem;
+.live-time {
+  width: 100%;
+  text-align: left;
 }
 
 .live-active {
-  border: 3px red solid;
+  border: 3px solid red;
   background-color: pink;
-}
-
-.live-ended {
-  background-color: lightgray;
 }
 
 .live-unsure {
   background-color: yellow;
 }
 
-.footer {
-  width: 100%;
-  color: white;
+.live-ended {
+  background-color: lightgray;
+}
+
+.txt-center {
   text-align: center;
-  padding: 0px;
 }
 
-.footer p {
-  margin: 0px;
-}
-
-.navblock {
+.bg {
   background-color: #303030;
-  padding: 20px;
-  margin-top: 20px;
+  color: #87ceeb;
   border-radius: 4px;
 }
 
-.navblock-text {
-  color: skyblue;
+.col-1 {
+  width: 25%;
 }
 
-.navblock-text a {
-  color: skyblue;
+nav {
 }
 
-.navblock-text a:hover {
+nav ul {
+  list-style: none;
+  padding: 0;
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+nav a {
+  padding: 1em;
+  text-decoration: none;
+  color: lightskyblue;
+}
+
+nav a:hover {
+  background-color: #505050;
   color: white;
 }
 
-.sidebar a {
-  display: block;
-  padding: 10px;
+nav hr {
+  border-top: 1px solid gray;
 }
 
-.text-black {
-  color: #222;
+nav-group-selected {
+  background-color: lightskyblue;
+  color: #303030;
 }
 
-.text-white {
+nav .tz {
+  padding: 0 1em;
+}
+
+nav .tz p {
   color: white;
 }
 
-.text-bold {
-  font-weight: bold;
-}
-
-.bg-white {
+nav .tz-select {
   background-color: white;
+  color: black;
 }
 
-.nav-break {
-  border-top: 1px solid white;
-  padding-top: 30px;
+.footer {
+  padding: 1em;
+  text-align: center;
+  color: white;
 }
 
-.nav-timezone p {
-  margin-bottom: 10px;
+.footer p {
+  padding-bottom: 0.5em;
+  margin: 0;
+}
+
+.sidebar {
+  margin-bottom: 2em;
+}
+
+// xs --- Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// sm --- Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .lives {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+// md --- Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .lives {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    column-gap: 1.5em;
+  }
+}
+
+// lg --- Large devices (desktops, 992px and up)
+@media (min-width: 992px) {  
+  .lives {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 1.5em;
+  }
+}
+
+// xl --- Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {  
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    column-gap: 2em;
+    margin: 3em;
+  }
+
+  .footer {
+    margin: 0 3em;
+    padding: 1em;
+    text-align: center;
+    color: white;
+  }
+  
+  .footer p {
+    padding-bottom: 0.5em;
+    margin: 0;
+  }
+
+  .sidebar {
+    margin-bottom: 0;
+  }
 }

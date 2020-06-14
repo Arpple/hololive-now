@@ -12,18 +12,20 @@
   <body>
     <header>
     </header>
-    <div class="content">
+    <div>
       <%= @inner_content %>
     </div>
-    <div class="footer navblock">
-      <p> All content from Hololive @ cover corp. </p>
-      <p> Web by Arpple</p>
-      <a href="https://twitter.com/arpplebog">
-        <img style="width:24px;height:24px" src="<%= Routes.static_path(@conn, "/images/twitter.png") %>">
-      </a>
-      <a href="https://github.com/arpple/hololive-now">
-        <img style="width:24px;height:24px" src="<%= Routes.static_path(@conn, "/images/github.png") %>">
-      </a>
+    <div class="container">
+      <div class="footer bg">
+        <p> All content from Hololive @ cover corp. </p>
+        <p> Web by Arpple</p>
+        <a href="https://twitter.com/arpplebog">
+          <img style="width:24px;height:24px" src="<%= Routes.static_path(@conn, "/images/twitter.png") %>">
+        </a>
+        <a href="https://github.com/arpple/hololive-now">
+          <img style="width:24px;height:24px" src="<%= Routes.static_path(@conn, "/images/github.png") %>">
+        </a>
+      </div>
     </div>
   </body>
 </html>

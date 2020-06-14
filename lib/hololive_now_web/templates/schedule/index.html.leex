@@ -1,28 +1,31 @@
 <div class="wrapper">
-  <div class="sidebar navblock navblock-text">
-    <div>
-      <a href="<%= redirect_url("/", @tz) %>">全体</a>
-      <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
-      <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
-      <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
-      <a href="<%= redirect_url("/china", @tz) %>">China</a>
-      <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
-    </div>
-    <div class="nav-timezone nav-break text-white">
-      <p>Timezone</p>
-      <select id="tz-select" class="bg-white mav=break">
-        <%= for zone <- Tzdata.zone_list() do %>
-          <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
-        <% end %>
-      </select>
-    </div>
+  <div class="sidebar bg">
+    <nav>
+      <ul>
+        <a href="<%= redirect_url("/", @tz) %>">全体</a>
+        <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
+        <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
+        <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
+        <a href="<%= redirect_url("/china", @tz) %>">China</a>
+        <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
+      </ul>
+      <hr>
+      <div class="tz">
+        <p>Timezone</p>
+        <select id="tz-select" class="tz-select">
+          <%= for zone <- Tzdata.zone_list() do %>
+            <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
+          <% end %>
+        </select>
+      </div>
+    </nav>
   </div>
   <div class="content">
     <%= for {date, lives} <- group_by_date(@lives, @tz) do %>
-      <div class="date navblock navblock-text">
+      <div class="date bg txt-center">
         <b><%= date_str(date) %></b>
       </div>
-      <div class="date-group">
+      <div class="lives">
         <%= for live <- lives do %>
           <a href="<%= live.url %>" target="_blank">
             <div class="<%= live_class(live, @now) %>">
