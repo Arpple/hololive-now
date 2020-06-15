@@ -2,8 +2,8 @@ defmodule HololiveNowWeb.ScheduleLive do
   use HololiveNowWeb, :live_view
   alias HololiveNow.Schedule
   alias HololiveNowWeb.ScheduleView
-  alias HololiveNowWeb.Endpoint
   alias Phoenix.PubSub
+  alias HololiveNowWeb.Presence
   require Logger
 
   @all_groups [
@@ -32,13 +32,15 @@ defmodule HololiveNowWeb.ScheduleLive do
     |> get_topic()
 
     PubSub.subscribe(HololiveNow.PubSub, topic)
+    Presence.track(self(), topic, socket.id, %{})
 
     {:ok, assign(socket, lives: lives, tz: tz, now: now)}
   end
 
   def update() do
     now = Timex.now()
-    IO.puts(DateTime.to_string(now) <> " update")
+
+    log_update()
 
     for group <- @all_groups do
       topic = get_topic(group)
@@ -47,9 +49,28 @@ defmodule HololiveNowWeb.ScheduleLive do
     end
   end
 
+  defp log_update() do
+    user_count = @all_groups
+    |> Enum.map(&get_topic/1)
+    |> Enum.reduce(0, fn topic, count ->
+      topic_count = topic
+      |> Presence.list()
+      |> Map.keys()
+      |> length()
+
+      count + topic_count
+    end)
+
+    IO.puts("update: users=" <> to_string(user_count))
+  end
+
   @impl true
   def handle_info({:update, %{ lives: lives, now: now }}, socket) do
     {:noreply, assign(socket, lives: lives, now: now)}
+  end
+
+  def handle_info(%{ event: "presence_diff" }, socket) do
+    {:noreply, socket}
   end
 
   # for test

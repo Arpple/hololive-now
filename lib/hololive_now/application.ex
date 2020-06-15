@@ -13,6 +13,7 @@ defmodule HololiveNow.Application do
       HololiveNowWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: HololiveNow.PubSub},
+      HololiveNowWeb.Presence,
       # Start the Endpoint (http/https)
       HololiveNowWeb.Endpoint,
       # Start a worker by calling: HololiveNow.Worker.start_link(arg)
