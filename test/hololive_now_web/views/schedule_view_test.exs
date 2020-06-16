@@ -106,4 +106,19 @@ defmodule HololiveNowWeb.ScheduleViewTest do
     assert ScheduleView.redirect_url("/", "Asia/Tokyo") == "/?tz=Asia/Tokyo"
     assert ScheduleView.redirect_url("/hololive", "Asia/Bangkok") == "/hololive?tz=Asia/Bangkok"
   end
+
+  test "nav group class" do
+    assert_nav_group_class(nil, nil, "nav-group-selected")
+    assert_nav_group_class(nil, "hololive", "")
+    assert_nav_group_class(nil, "innk", "")
+    assert_nav_group_class(nil, "china", "")
+    assert_nav_group_class(nil, "indonesia", "")
+    assert_nav_group_class("hololive", nil, "")
+    assert_nav_group_class("hololive", "hololive", "nav-group-selected")
+    assert_nav_group_class("holostars", "holostars", "nav-group-selected")
+  end
+
+  defp assert_nav_group_class(nav_group, current_group, expected_class) do
+    assert ScheduleView.nav_group_class(nav_group, current_group) == expected_class
+  end
 end

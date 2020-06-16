@@ -41,4 +41,7 @@ defmodule HololiveNowWeb.ScheduleView do
   def redirect_url(path, timezone) do
     path <> "?tz=" <> timezone
   end
+
+  def nav_group_class(group, group), do: "nav-group-selected"
+  def nav_group_class(_group, _other), do: ""
  end

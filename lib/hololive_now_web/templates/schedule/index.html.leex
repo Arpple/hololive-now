@@ -2,12 +2,12 @@
   <div class="sidebar bg">
     <nav>
       <ul>
-        <a href="<%= redirect_url("/", @tz) %>">全体</a>
-        <a href="<%= redirect_url("/hololive", @tz) %>">ホロライブ</a>
-        <a href="<%= redirect_url("/holostars", @tz) %>">ホロスターズ</a>
-        <a href="<%= redirect_url("/innk", @tz) %>">イノナカ</a>
-        <a href="<%= redirect_url("/china", @tz) %>">China</a>
-        <a href="<%= redirect_url("/indonesia", @tz) %>">Indonesia</a>
+        <a href="<%= redirect_url("/", @tz) %>" class="<%= nav_group_class(nil, @group) %>">全体</a>
+        <a href="<%= redirect_url("/hololive", @tz) %>" class="<%= nav_group_class("hololive", @group) %>">ホロライブ</a>
+        <a href="<%= redirect_url("/holostars", @tz) %>" class="<%= nav_group_class("holostars", @group) %>">ホロスターズ</a>
+        <a href="<%= redirect_url("/innk", @tz) %>" class="<%= nav_group_class("inkk", @group) %>">イノナカ</a>
+        <a href="<%= redirect_url("/china", @tz) %>" class="<%= nav_group_class("china", @group) %>">China</a>
+        <a href="<%= redirect_url("/indonesia", @tz) %>" class="<%= nav_group_class("indonesia", @group) %>">Indonesia</a>
       </ul>
       <hr>
       <div class="tz">

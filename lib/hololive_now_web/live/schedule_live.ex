@@ -34,7 +34,7 @@ defmodule HololiveNowWeb.ScheduleLive do
     PubSub.subscribe(HololiveNow.PubSub, topic)
     Presence.track(self(), topic, socket.id, %{})
 
-    {:ok, assign(socket, lives: lives, tz: tz, now: now)}
+    {:ok, assign(socket, lives: lives, tz: tz, now: now, group: group)}
   end
 
   def update() do
