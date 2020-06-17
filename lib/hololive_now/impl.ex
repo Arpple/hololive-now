@@ -3,5 +3,8 @@ defmodule HololiveNow.Impl do
 
   alias HololiveNow.Live
 
-  @callback fetch_lives(String.t) :: {:ok, list(Live.t)} | {:error}
+  @type result :: {:ok, list(Live.t)} | {:error}
+
+  @callback fetch_lives() :: result
+  @callback fetch_lives(String.t) :: result
 end

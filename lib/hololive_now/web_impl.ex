@@ -1,10 +1,13 @@
-defmodule HololiveNow.DefaultImpl do
+defmodule HololiveNow.WebImpl do
+  @moduledoc false
+
   alias HololiveNow.Impl
   alias HololiveNow.Schedule
 
   @behaviour Impl
 
-  @spec fetch_lives(String.t) :: {:ok, list(Live.t)} | {:error}
+  def fetch_lives(), do: fetch_lives("")
+
   def fetch_lives(group) do
     lives = Schedule.all(group)
     {:ok, lives}
