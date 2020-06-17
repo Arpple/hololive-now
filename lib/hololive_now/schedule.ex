@@ -1,6 +1,8 @@
 defmodule HololiveNow.Schedule do
+  @moduledoc false
+
   alias HololiveNow.Live
-  
+
   @url "https://schedule.hololive.tv/lives"
 
   def all(), do: get("")
@@ -57,7 +59,7 @@ defmodule HololiveNow.Schedule do
     [container] = Floki.find(container_a, ".container")
     [row] = Floki.children(container)
     [head, thumbnail, icons] = Floki.children(row)
-    
+
     {:ok, ndatetime} = NaiveDateTime.new(date, get_time(head))
     datetime = DateTime.from_naive!(ndatetime, "Asia/Tokyo")
 

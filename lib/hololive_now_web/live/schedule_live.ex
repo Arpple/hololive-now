@@ -1,6 +1,6 @@
 defmodule HololiveNowWeb.ScheduleLive do
   use HololiveNowWeb, :live_view
-  alias HololiveNow.Schedule
+
   alias HololiveNowWeb.ScheduleView
   alias Phoenix.PubSub
   alias HololiveNowWeb.Presence
@@ -26,7 +26,7 @@ defmodule HololiveNowWeb.ScheduleLive do
     tz = params["tz"] || "Asia/Tokyo"
 
     now = Timex.now()
-    lives = Schedule.all(group)
+    {:ok, lives} = HololiveNow.fetch_lives(group)
 
     topic = group
     |> get_topic()
@@ -44,7 +44,7 @@ defmodule HololiveNowWeb.ScheduleLive do
 
     for group <- @all_groups do
       topic = get_topic(group)
-      lives = Schedule.all(group)
+      {:ok, lives} = HololiveNow.fetch_lives(group)
       PubSub.broadcast(HololiveNow.PubSub, topic, {:update, %{ lives: lives, now: now }})
     end
   end

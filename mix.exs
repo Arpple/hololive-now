@@ -49,6 +49,8 @@ defmodule HololiveNow.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.6.2"},
       {:timex, "~> 3.6.1"},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0", only: :dev, runtime: false},
     ]
   end
 
