@@ -9,10 +9,11 @@ defmodule HololiveNow.WebImpl do
 
   @url "https://schedule.hololive.tv/lives"
 
-  def fetch_lives(), do: fetch_lives("")
+  def fetch_lives(), do: fetch_lives_from(@url)
+  def fetch_lives(""), do: fetch_lives_from(@url)
+  def fetch_lives(group), do: fetch_lives_from(@url <> "/" <> group)
 
-  def fetch_lives(group) do
-    url = @url <> "/" <> group
+  defp fetch_lives_from(url) do
     %{body: body} = HTTPoison.get!(url)
 
     lives = body
