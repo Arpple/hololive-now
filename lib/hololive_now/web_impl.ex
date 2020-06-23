@@ -12,7 +12,7 @@ defmodule HololiveNow.WebImpl do
   def fetch_lives(), do: fetch_lives("")
 
   def fetch_lives(group) do
-    url = @url <> group
+    url = @url <> "/" <> group
     %{body: body} = HTTPoison.get!(url)
 
     lives = body
