@@ -108,12 +108,12 @@ defmodule HololiveNowWeb.ScheduleViewTest do
   end
 
   test "nav group class" do
-    assert_nav_group_class(nil, nil, "nav-group-selected")
-    assert_nav_group_class(nil, "hololive", "")
-    assert_nav_group_class(nil, "innk", "")
-    assert_nav_group_class(nil, "china", "")
-    assert_nav_group_class(nil, "indonesia", "")
-    assert_nav_group_class("hololive", nil, "")
+    assert_nav_group_class("", "", "nav-group-selected")
+    assert_nav_group_class("", "hololive", "")
+    assert_nav_group_class("", "innk", "")
+    assert_nav_group_class("", "china", "")
+    assert_nav_group_class("", "indonesia", "")
+    assert_nav_group_class("hololive", "", "")
     assert_nav_group_class("hololive", "hololive", "nav-group-selected")
     assert_nav_group_class("holostars", "holostars", "nav-group-selected")
   end

@@ -22,46 +22,45 @@ defmodule HololiveNowWeb.ScheduleLive do
 
   @impl true
   def mount(params, _session, socket) do
-    group = params["group"]
-    tz = params["tz"] || "Asia/Tokyo"
-
-    now = Timex.now()
-    {:ok, lives} = HololiveNow.fetch_lives(group)
-
-    topic = group
+    topic = params["group"]
     |> get_topic()
+
+    tz = params["tz"] || "Asia/Tokyo"
+    now = Timex.now()
+
+    {:ok, lives} = HololiveNow.fetch_lives(topic)
 
     PubSub.subscribe(HololiveNow.PubSub, topic)
     Presence.track(self(), topic, socket.id, %{})
 
-    {:ok, assign(socket, lives: lives, tz: tz, now: now, group: group)}
+    {:ok, assign(socket, lives: lives, tz: tz, now: now, topic: topic)}
   end
 
   def update() do
     now = Timex.now()
 
-    log_update()
-
-    for group <- @all_groups do
-      topic = get_topic(group)
-      {:ok, lives} = HololiveNow.fetch_lives(group)
-      PubSub.broadcast(HololiveNow.PubSub, topic, {:update, %{ lives: lives, now: now }})
-    end
-  end
-
-  defp log_update() do
     user_count = @all_groups
     |> Enum.map(&get_topic/1)
     |> Enum.reduce(0, fn topic, count ->
-      topic_count = topic
-      |> Presence.list()
-      |> Map.keys()
-      |> length()
-
-      count + topic_count
+      case count_topic_user(topic) do
+        0 -> count
+        topic_count ->
+          {:ok, lives} = HololiveNow.fetch_lives(topic)
+          PubSub.broadcast(HololiveNow.PubSub, topic, {:update, %{ lives: lives, now: now }})
+          count + topic_count
+      end
     end)
 
     IO.puts("update: users=" <> to_string(user_count))
+
+    :ok
+  end
+
+  defp count_topic_user(topic) do
+    topic
+    |> Presence.list()
+    |> Map.keys()
+    |> length()
   end
 
   @impl true
