@@ -29,7 +29,7 @@ defmodule HololiveNow.Live do
         |> abs()
 
         if diff < 15 do
-          :unsure
+          :prepare
         else
           :ended
         end

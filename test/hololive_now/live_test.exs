@@ -24,7 +24,7 @@ defmodule HololiveNow.LiveTest do
     assert Live.state(live, now) == :active
   end
 
-  test "state is unsure when status not active but just start for lower than 15 minutes" do
+  test "state is prepare when status not active but just start for lower than 15 minutes" do
     live = %Live{
       active?: false,
       start_time: ~U[2000-01-01 12:00:00Z],
@@ -32,7 +32,7 @@ defmodule HololiveNow.LiveTest do
 
     now = ~U[2000-01-01 12:10:00Z]
 
-    assert Live.state(live, now) == :unsure
+    assert Live.state(live, now) == :prepare
   end
 
   test "state is end when status not active and pass the start time over 15 minutes" do

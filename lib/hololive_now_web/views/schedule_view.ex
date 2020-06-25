@@ -24,7 +24,7 @@ defmodule HololiveNowWeb.ScheduleView do
     case Live.state(live, now) do
       :future -> "live"
       :active -> "live live-active"
-      :unsure -> "live live-unsure"
+      :prepare -> "live live-prepare"
       :ended -> "live live-ended"
     end
   end
