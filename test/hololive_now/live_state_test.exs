@@ -1,6 +1,8 @@
 defmodule HololiveNow.LiveTest do
   use ExUnit.Case
+
   alias HololiveNow.Live
+  alias HololiveNow.LiveState
 
   test "state is future when not reach start time yet" do
     live = %Live{
@@ -10,7 +12,7 @@ defmodule HololiveNow.LiveTest do
 
     now = ~U[2000-01-01 11:00:00Z]
 
-    assert Live.state(live, now) == :future
+    assert LiveState.get(live, now) == :future
   end
 
   test "state is active when status active" do
@@ -21,7 +23,7 @@ defmodule HololiveNow.LiveTest do
 
     now = ~U[2000-01-01 12:05:00Z]
 
-    assert Live.state(live, now) == :active
+    assert LiveState.get(live, now) == :active
   end
 
   test "state is prepare when status not active but just start for lower than 15 minutes" do
@@ -32,7 +34,7 @@ defmodule HololiveNow.LiveTest do
 
     now = ~U[2000-01-01 12:10:00Z]
 
-    assert Live.state(live, now) == :prepare
+    assert LiveState.get(live, now) == :prepare
   end
 
   test "state is end when status not active and pass the start time over 15 minutes" do
@@ -43,6 +45,6 @@ defmodule HololiveNow.LiveTest do
 
     now = ~U[2000-01-01 12:16:00Z]
 
-    assert Live.state(live, now) == :ended
+    assert LiveState.get(live, now) == :ended
   end
 end

@@ -51,6 +51,7 @@ defmodule HololiveNow.MixProject do
       {:timex, "~> 3.6.1"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0.2", only: :dev, runtime: false},
     ]
   end
 
