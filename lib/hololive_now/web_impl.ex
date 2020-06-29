@@ -4,6 +4,7 @@ defmodule HololiveNow.WebImpl do
   alias HololiveNow.Impl
   alias HololiveNow.Schedule
   alias HololiveNow.Live
+  alias HololiveNow.WebImpl.GroupContainer
 
   @behaviour Impl
 
@@ -19,33 +20,11 @@ defmodule HololiveNow.WebImpl do
     lives = body
     |> Floki.parse_document!()
     |> Floki.find("#all .container")
-    |> read_group_containers()
+    |> GroupContainer.from_container_divs()
     |> convert_to_lives()
     |> flatten_dategroup()
 
     {:ok, lives}
-  end
-
-  def read_group_containers(group_containers) do
-    list = Enum.reduce(group_containers, [], fn group_container, acc ->
-      if has_date?(group_container) do
-        block = %{
-          date: get_date(group_container),
-          containers: get_containers(group_container),
-        }
-
-        [block | acc]
-      else
-        case acc do
-          [] -> acc
-
-          [block | rem] ->
-            [ %{block | containers: block.containers ++ get_containers(group_container)} | rem ]
-        end
-      end
-    end)
-
-    Enum.reverse(list)
   end
 
   def convert_to_lives(blocks) do
@@ -78,30 +57,6 @@ defmodule HololiveNow.WebImpl do
     }
   end
 
-  def has_date?(group_container) do
-    datetime = Floki.find(group_container, ".navbar-text")
-    not Enum.empty?(datetime)
-  end
-
-  def get_date(group_container) do
-    [date_str, _] = group_container
-    |> Floki.find(".navbar-text")
-    |> Enum.at(0)
-    |> Floki.text()
-    |> String.trim()
-    |> String.split("\n")
-
-    [month, date] = date_str
-    |> String.trim()
-    |> String.split("/")
-    |> Enum.map(&Util.parse_int/1)
-
-    year = DateTime.utc_now().year
-
-    {:ok, date} = Date.new(year, month, date)
-    date
-  end
-
   def get_time(head) do
     [hour, min] = head
     |> Floki.find(".datetime")
@@ -112,11 +67,6 @@ defmodule HololiveNow.WebImpl do
 
     {:ok, time} = Time.new(hour, min, 0)
     time
-  end
-
-  def get_containers(group_container) do
-    group_container
-    |> Floki.find(".thumbnail")
   end
 
   def get_channel(head) do
