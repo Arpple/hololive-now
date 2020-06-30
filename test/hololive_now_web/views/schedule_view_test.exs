@@ -102,6 +102,20 @@ defmodule HololiveNowWeb.ScheduleViewTest do
     ] = group
   end
 
+  test "group lives by date of different month" do
+    live_1 = %Live{ start_time: ~U[2020-06-30 12:00:00Z] }
+    live_2 = %Live{ start_time: ~U[2020-07-01 12:00:00Z] }
+    live_3 = %Live{ start_time: ~U[2020-07-02 12:00:00Z] }
+
+    group = ScheduleView.group_by_date([live_1, live_2, live_3], "Asia/Tokyo")
+
+    assert [
+      { ~D[2020-06-30], [^live_1] },
+      { ~D[2020-07-01], [^live_2] },
+      { ~D[2020-07-02], [^live_3] },
+    ] = group
+  end
+
   test "create redirect url with timezone query" do
     assert ScheduleView.redirect_url("/", "Asia/Tokyo") == "/?tz=Asia/Tokyo"
     assert ScheduleView.redirect_url("/hololive", "Asia/Bangkok") == "/hololive?tz=Asia/Bangkok"

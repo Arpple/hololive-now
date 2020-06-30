@@ -36,7 +36,7 @@ defmodule HololiveNowWeb.ScheduleView do
       Timex.Timezone.convert(start_time, tz)
       |> DateTime.to_date()
     end)
-    |> Enum.map(fn x -> x end) # convert to tuple to ensure ordering :\
+    |> Enum.sort(fn { d1, _ }, { d2, _ } -> Timex.before?(d1, d2) end)
   end
 
   def redirect_url(path, timezone) do
