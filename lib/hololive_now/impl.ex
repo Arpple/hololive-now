@@ -9,5 +9,5 @@ defmodule HololiveNow.Impl do
   @callback fetch_lives() :: result
   @callback fetch_lives(String.t) :: result
   
-  @callback get_live_state(Live.t) :: LiveState.t
+  @callback get_live_state(Live.t, DateTime.t) :: LiveState.t
 end

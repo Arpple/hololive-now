@@ -32,5 +32,23 @@ defmodule HololiveNow.WebImpl do
     end)
   end
 
-  def get_live_state
+  @prepare_minutes 15
+  def get_live_state(%Live{ active?: true }, _now), do: :active
+
+  def get_live_state(%Live{ start_time: start_time }, now) do
+    case Timex.compare(now, start_time) do
+      -1 -> :future
+
+      _ ->
+        diff = now
+        |> Timex.diff(start_time, :minute)
+        |> abs()
+
+        if diff < @prepare_minutes do
+          :prepare
+        else
+          :ended
+        end
+    end
+  end
 end
