@@ -2,7 +2,6 @@ defmodule HololiveNowWeb.ScheduleView do
   use HololiveNowWeb, :view
 
   alias HololiveNow.Live
-  alias HololiveNow.LiveState
 
   def thumbnail_url(%Live{start_time: start_time, thumbnail: thumbnail}, now) do
     case Timex.compare(now, start_time) do
@@ -22,7 +21,7 @@ defmodule HololiveNowWeb.ScheduleView do
   end
 
   def live_class(live, now) do
-    case LiveState.get(live, now) do
+    case HololiveNow.get_live_state(live, now) do
       :future -> "live"
       :active -> "live live-active"
       :prepare -> "live live-prepare"

@@ -17,6 +17,11 @@ defmodule HololiveNow do
     impl().fetch_lives(group)
   end
 
+  @spec get_live_state(Live.t, DateTime.t) :: LiveState.t
+  def get_live_state(live, now) do
+    impl().get_live_state(live, now)
+  end
+
   defp impl() do
     Application.get_env(:hololive_now, :impl, WebImpl)
   end
