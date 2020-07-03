@@ -2,8 +2,7 @@ defmodule HololiveNow do
   @moduledoc """
   """
 
-  alias HololiveNow.Live
-  alias HololiveNow.WebImpl
+  alias HololiveNow.{ Impl, WebImpl, Live }
 
   @behaviour Impl
 

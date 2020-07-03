@@ -72,19 +72,6 @@ defmodule HololiveNowWeb.ScheduleLive do
     {:noreply, socket}
   end
 
-  # for test
-  defp remove_active(lives) do
-    Enum.map(lives, fn live ->
-      Map.put(live, :active?, false)
-    end)
-  end
-
-  defp force_active(lives) do
-    Enum.map(lives, fn live ->
-      Map.put(live, :active?, true)
-    end)
-  end
-
   defp get_topic(nil), do: ""
   defp get_topic(group), do: group
 end
