@@ -34,8 +34,8 @@ defmodule HololiveNow.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.5.0"},
-      {:phoenix_ecto, "~> 4.1"},
-      {:ecto_sql, "~> 3.4"},
+      # {:phoenix_ecto, "~> 4.1"},
+      # {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.12.0"},
       {:floki, "~> 0.26.0"},

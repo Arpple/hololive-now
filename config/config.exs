@@ -9,8 +9,8 @@ use Mix.Config
 
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
-config :hololive_now,
-  ecto_repos: [HololiveNow.Repo]
+# config :hololive_now,
+#   ecto_repos: [HololiveNow.Repo]
 
 # Configures the endpoint
 config :hololive_now, HololiveNowWeb.Endpoint,

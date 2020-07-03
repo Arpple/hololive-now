@@ -32,7 +32,7 @@ defmodule HololiveNowWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :hololive_now
+    # plug Phoenix.Ecto.CheckRepoStatus, otp_app: :hololive_now
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
