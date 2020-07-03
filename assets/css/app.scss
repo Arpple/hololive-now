@@ -94,6 +94,8 @@
 
 .container {
   max-width: 1700px;
+  margin: auto;
+  padding: 0px;
 }
 
 .sidebar {
@@ -110,8 +112,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: max-content;
-  column-gap: 1em;
-  row-gap: 1em;
+  column-gap: 0.25em;
+  row-gap: 0.25em;
   margin: 1em 0;
 }
 
@@ -242,17 +244,25 @@ nav .tz-select {
 
 // sm --- Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
+  .lives {
+    column-gap: 1em;
+    row-gap: 1em;
+  }
 }
 
 // md --- Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  .container {
+    padding: 1em;
+  }
+
   .lives {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 
 // lg --- Large devices (desktops, 992px and up)
-@media (min-width: 992px) {  
+@media (min-width: 992px) {
   .lives {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
