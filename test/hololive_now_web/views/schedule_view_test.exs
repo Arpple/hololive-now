@@ -135,4 +135,16 @@ defmodule HololiveNowWeb.ScheduleViewTest do
   defp assert_nav_group_class(nav_group, current_group, expected_class) do
     assert ScheduleView.nav_group_class(nav_group, current_group) == expected_class
   end
+
+  test "date string" do
+    cases = [
+      {~D[2020-07-04], "07/04 (土)"},
+      {~D[2020-07-05], "07/05 (日)"},
+      {~D[2020-07-06], "07/06 (月)"},
+    ]
+
+    for {date, expected} <- cases do
+      assert ScheduleView.date_str(date) == expected
+    end
+  end
 end

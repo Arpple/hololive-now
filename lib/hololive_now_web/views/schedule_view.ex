@@ -11,8 +11,11 @@ defmodule HololiveNowWeb.ScheduleView do
     end
   end
 
+  @day_names ["月", "火", "水", "木", "金", "土", "日"]
+
   def date_str(date) do
-    to_string(date.month) <> "/" <> to_string(date.day)
+    day = Enum.at(@day_names, Timex.weekday(date) - 1)
+    Timex.format!(date, "%m/%d", :strftime) <> " (#{day})"
   end
 
   def time(%Live{ start_time: datetime }, tz) do
