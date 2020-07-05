@@ -2,7 +2,6 @@ defmodule HololiveNow.WebImpl do
   @moduledoc false
 
   alias HololiveNow.Impl
-  alias HololiveNow.Schedule
   alias HololiveNow.Live
   alias HololiveNow.WebImpl.{ GroupContainer, Container }
 
