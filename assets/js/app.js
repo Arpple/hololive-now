@@ -41,12 +41,21 @@ function setupTimezoneSelect() {
   }
 }
 
-function scrollToActive() {
-  const lives = document.getElementsByClassName("live-active")
+function scrollTo(className) {
+  const elems = document.getElementsByClassName(className)
 
-  if (lives.length > 0) {
-    lives[0].scrollIntoView({ behavior: "smooth" })
+  if (elems.length > 0) {
+    elems[0].scrollIntoView({ behavior: "smooth" })
+    return true
   }
+
+  return false
+}
+
+function scrollToActive() {
+  scrollTo("live-active")
+    || scrollTo("live-prepare")
+    || scrollTo("live-future")
 }
 
 window.onload = () => {

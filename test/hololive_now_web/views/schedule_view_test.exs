@@ -85,7 +85,7 @@ defmodule HololiveNowWeb.ScheduleViewTest do
 
     now = ~U[2000-01-01 11:00:00Z]
 
-    assert ScheduleView.live_class(live, now) == "live"
+    assert ScheduleView.live_class(live, now) == "live live-future"
   end
 
   test "group lives by date of timezone" do

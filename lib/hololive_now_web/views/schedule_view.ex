@@ -25,7 +25,7 @@ defmodule HololiveNowWeb.ScheduleView do
 
   def live_class(live, now) do
     case HololiveNow.get_live_state(live, now) do
-      :future -> "live"
+      :future -> "live live-future"
       :active -> "live live-active"
       :prepare -> "live live-prepare"
       :ended -> "live live-ended"
