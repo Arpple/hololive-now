@@ -6,19 +6,22 @@ defmodule HololiveNow.WebImpl.Container do
   def to_live(date, container) do
     [sub_container] = Floki.find(container, ".container")
     [row] = Floki.children(sub_container)
-    [head, thumbnail, icons] = Floki.children(row)
+    case Floki.children(row) do
+      [head, thumbnail, icons] ->
+        {:ok, ndatetime} = NaiveDateTime.new(date, get_time(head))
+        datetime = DateTime.from_naive!(ndatetime, "Asia/Tokyo")
 
-    {:ok, ndatetime} = NaiveDateTime.new(date, get_time(head))
-    datetime = DateTime.from_naive!(ndatetime, "Asia/Tokyo")
+        %Live{
+          url: get_url(container),
+          start_time: datetime,
+          channel: get_channel(head),
+          thumbnail: get_thumbnail_url(thumbnail),
+          icons: get_icons_url(icons),
+          active?: active?(container),
+        }
 
-    %Live{
-      url: get_url(container),
-      start_time: datetime,
-      channel: get_channel(head),
-      thumbnail: get_thumbnail_url(thumbnail),
-      icons: get_icons_url(icons),
-      active?: active?(container),
-    }
+      _ -> nil
+    end
   end
   
   defp get_channel(head) do

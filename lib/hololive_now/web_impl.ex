@@ -28,6 +28,7 @@ defmodule HololiveNow.WebImpl do
   def convert_to_lives(group_containers) do
     Enum.flat_map(group_containers, fn group ->
       Enum.map(group.containers, fn container -> Container.to_live(group.date, container) end)
+      |> Enum.filter(fn live -> !is_nil(live) end)
     end)
   end
 
