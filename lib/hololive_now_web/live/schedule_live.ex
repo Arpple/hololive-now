@@ -13,6 +13,7 @@ defmodule HololiveNowWeb.ScheduleLive do
     "innk",
     "china",
     "indonesia",
+    "english",
   ]
 
   @impl true
