@@ -138,9 +138,9 @@ defmodule HololiveNowWeb.ScheduleViewTest do
 
   test "date string" do
     cases = [
-      {~D[2020-07-04], "07/04 (土)"},
-      {~D[2020-07-05], "07/05 (日)"},
-      {~D[2020-07-06], "07/06 (月)"},
+      {~D[2020-07-04], "07/04 (土 - SAT)"},
+      {~D[2020-07-05], "07/05 (日 - SUN)"},
+      {~D[2020-07-06], "07/06 (月 - MON)"},
     ]
 
     for {date, expected} <- cases do

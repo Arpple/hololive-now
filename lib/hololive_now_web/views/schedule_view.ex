@@ -11,7 +11,7 @@ defmodule HololiveNowWeb.ScheduleView do
     end
   end
 
-  @day_names ["月", "火", "水", "木", "金", "土", "日"]
+  @day_names ["月 - MON", "火 - TUE", "水 - WED", "木 - THU", "金 - FRI", "土 - SAT", "日 - SUN"]
 
   def date_str(date) do
     day = Enum.at(@day_names, Timex.weekday(date) - 1)
