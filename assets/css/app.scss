@@ -183,7 +183,7 @@
   width: 25%;
 }
 
-nav ul {
+.nav-list {
   list-style: none;
   padding: 0;
   padding-top: 0.5em;
@@ -191,13 +191,13 @@ nav ul {
   flex-direction: column;
 }
 
-nav a {
+.nav-link {
   padding: 1em;
   text-decoration: none;
   color: lightskyblue;
 }
 
-nav a:hover {
+.nav-link:hover {
   background-color: #505050;
   color: white;
 }
@@ -211,11 +211,15 @@ nav hr {
   color: #303030;
 }
 
-nav .tz {
+.nav-block-pad {
   padding: 0 1em;
 }
 
-nav .tz p {
+.nav-block {
+  padding: 0 0;
+}
+
+.nav-header {
   color: white;
 }
 

@@ -1,23 +1,32 @@
 <div class="wrapper">
   <div class="sidebar bg">
     <nav>
-      <ul>
-        <a href="<%= redirect_url("/", @tz) %>" class="<%= nav_group_class("", @topic) %>">全体 - All</a>
-        <a href="<%= redirect_url("/hololive", @tz) %>" class="<%= nav_group_class("hololive", @topic) %>">ホロライブ - Hololive</a>
-        <a href="<%= redirect_url("/holostars", @tz) %>" class="<%= nav_group_class("holostars", @topic) %>">ホロスターズ - Holostars</a>
-        <a href="<%= redirect_url("/innk", @tz) %>" class="<%= nav_group_class("inkk", @topic) %>">イノナカ - Inonaka</a>
-        <a href="<%= redirect_url("/china", @tz) %>" class="<%= nav_group_class("china", @topic) %>">China</a>
-        <a href="<%= redirect_url("/indonesia", @tz) %>" class="<%= nav_group_class("indonesia", @topic) %>">Indonesia</a>
-        <a href="<%= redirect_url("/english", @tz) %>" class="<%= nav_group_class("english", @topic) %>">English</a>
-      </ul>
+      <div class="nav-block">
+        <ul class="nav-list">
+          <a class="nav-link" href="<%= redirect_url("/", @tz) %>" class="<%= nav_group_class("", @topic) %>">全体 - All</a>
+          <a class="nav-link" href="<%= redirect_url("/hololive", @tz) %>" class="<%= nav_group_class("hololive", @topic) %>">ホロライブ - Hololive</a>
+          <a class="nav-link" href="<%= redirect_url("/holostars", @tz) %>" class="<%= nav_group_class("holostars", @topic) %>">ホロスターズ - Holostars</a>
+          <a class="nav-link" href="<%= redirect_url("/innk", @tz) %>" class="<%= nav_group_class("inkk", @topic) %>">イノナカ - Inonaka</a>
+          <a class="nav-link" href="<%= redirect_url("/china", @tz) %>" class="<%= nav_group_class("china", @topic) %>">China</a>
+          <a class="nav-link" href="<%= redirect_url("/indonesia", @tz) %>" class="<%= nav_group_class("indonesia", @topic) %>">Indonesia</a>
+          <a class="nav-link" href="<%= redirect_url("/english", @tz) %>" class="<%= nav_group_class("english", @topic) %>">English</a>
+        </ul>
+      </div>
       <hr>
-      <div class="tz">
-        <p>Timezone</p>
+      <div class="nav-block-pad">
+        <p class="nav-header">Timezone</p>
         <select id="tz-select" class="tz-select">
           <%= for zone <- Tzdata.zone_list() do %>
             <option value="<%= zone %>" <%= if zone == @tz do %>selected<% end %>><%= zone %></option>
           <% end %>
         </select>
+      </div>
+      <hr>
+      <div class="nav-block">
+        <p class="nav-header nav-block-pad">Links</p>
+        <ul class="nav-list">
+          <a class="nav-link" href="https://schedule.hololive.tv/lives">Official Schedule</a>
+        </ul>
       </div>
     </nav>
   </div>
