@@ -50,10 +50,21 @@ defmodule HololiveNow.WebImpl.GroupContainer do
     |> String.split("/")
     |> Enum.map(&Util.parse_int/1)
 
-    year = DateTime.utc_now().year
+    year = get_year(DateTime.utc_now(), month)
 
     {:ok, date} = Date.new(year, month, date)
     date
+  end
+
+  defp get_year(now, div_month) do
+    now_month = now.month
+
+    # assume new year
+    if now_month == 12 and div_month == 1 do
+      now.year + 1
+    else
+      now.year
+    end
   end
 
   defp get_containers(div) do
