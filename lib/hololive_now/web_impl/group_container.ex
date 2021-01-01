@@ -62,6 +62,10 @@ defmodule HololiveNow.WebImpl.GroupContainer do
     # assume new year
     if now_month == 12 and div_month == 1 do
       now.year + 1
+    end
+
+    if now_month == 1 and div_month == 12 do
+      now.year - 1
     else
       now.year
     end
